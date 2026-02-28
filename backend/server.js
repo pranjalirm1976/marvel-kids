@@ -17,8 +17,13 @@ app.use(express.json());
 
 // --------------- Routes ---------------
 
+// Root route
+app.get("/", (req, res) => {
+  res.status(200).send("Marvel Kids API is running successfully.");
+});
+
 // Health-check route
-app.get("/api/health", (_req, res) => {
+app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "success",
     message: "Server is up and running!",
@@ -30,6 +35,11 @@ app.use("/api/products", productRoutes);
 
 // Order routes
 app.use("/api/orders", orderRoutes);
+
+// --------------- 404 Handler ---------------
+app.use((req, res, next) => {
+  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+});
 
 // --------------- Database Connection & Server Start ---------------
 const startServer = async () => {
