@@ -8,13 +8,21 @@ const createProduct = async (req, res) => {
   try {
     const productData = { ...req.body };
 
-    // Parse images if sent as JSON string (multipart form)
-    if (typeof productData.images === "string") {
-      try {
-        productData.images = JSON.parse(productData.images);
-      } catch {
-        productData.images = productData.images ? [productData.images] : [];
+    // Parse array fields if sent as JSON strings (multipart form)
+    const arrayFields = ["images", "sizes", "colors", "tags", "sizeVariants"];
+    for (const field of arrayFields) {
+      if (typeof productData[field] === "string") {
+        try {
+          productData[field] = JSON.parse(productData[field]);
+        } catch {
+          productData[field] = productData[field] ? [productData[field]] : [];
+        }
       }
+    }
+
+    // Parse boolean fields from string
+    if (typeof productData.featured === "string") {
+      productData.featured = productData.featured === "true";
     }
 
     // If a file was uploaded, send it to Cloudinary
@@ -65,9 +73,28 @@ const getProductById = async (req, res) => {
 // @access  Public (will be Admin-only later)
 const updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true, // Return the updated document
-      runValidators: true, // Re-run schema validators on update
+    const updateData = { ...req.body };
+
+    // Parse array fields if sent as JSON strings (multipart form)
+    const arrayFields = ["images", "sizes", "colors", "tags", "sizeVariants"];
+    for (const field of arrayFields) {
+      if (typeof updateData[field] === "string") {
+        try {
+          updateData[field] = JSON.parse(updateData[field]);
+        } catch {
+          updateData[field] = updateData[field] ? [updateData[field]] : [];
+        }
+      }
+    }
+
+    // Parse boolean fields from string
+    if (typeof updateData.featured === "string") {
+      updateData.featured = updateData.featured === "true";
+    }
+
+    const product = await Product.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+      runValidators: true,
     });
 
     if (!product) {
