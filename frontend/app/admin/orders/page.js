@@ -4,12 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ShoppingCart, Package } from "lucide-react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
+
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`);
+      const { data } = await axios.get(`${API_BASE}/api/orders`);
       setOrders(data.orders);
     } catch (err) {
       console.error("Failed to fetch orders:", err);
@@ -22,7 +24,7 @@ export default function AdminOrdersPage() {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/orders/${orderId}/status`, {
+      await axios.put(`${API_BASE}/api/orders/${orderId}/status`, {
         orderStatus: newStatus,
       });
       fetchOrders();

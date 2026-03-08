@@ -34,7 +34,7 @@ function ShopContent() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
         const { data } = await axios.get(`${API_URL}/api/products`);
         setProducts(data.data || []);
       } catch (err) {

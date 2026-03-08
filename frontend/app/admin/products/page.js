@@ -5,7 +5,7 @@ import axios from "axios";
 import { Plus, Trash2, Edit3, X, Star, Tag, Eye, Package, Search, Filter } from "lucide-react";
 import Link from "next/link";
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/products`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/products`;
 
 const CATEGORIES = ["Men", "Women", "Kids", "Accessories", "Boys", "Girls", "Unisex", "Sports"];
 const SUBCATEGORIES = {

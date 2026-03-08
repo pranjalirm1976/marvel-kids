@@ -9,7 +9,7 @@ import axios from "axios";
 import { CreditCard, Banknote, Shield, Truck, Lock, ChevronLeft, MapPin, User, Mail, ArrowRight, Sparkles, CheckCircle } from "lucide-react";
 import useCartStore from "@/store/useCartStore";
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/orders`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/orders`;
 
 export default function CheckoutPage() {
   const router = useRouter();

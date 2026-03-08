@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import useCartStore from "@/store/useCartStore";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
 
 export default function ProductPage() {
   const params = useParams();
