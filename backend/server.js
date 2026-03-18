@@ -65,17 +65,12 @@ app.use((err, _req, res, _next) => {
 });
 
 // --------------- Database Connection & Server Start ---------------
-const startServer = async () => {
-  try {
-    await connectDB();
-  } catch (err) {
-    console.error("Failed to connect to MongoDB on startup:", err.message);
-    console.warn("Continuing anyway - database operations may fail until connection is restored.");
-  }
-  
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
-};
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
-startServer();
+// Try to connect to MongoDB in the background (non-blocking)
+connectDB().catch((err) => {
+  console.error("Failed to connect to MongoDB on startup:", err.message);
+  console.warn("Continuing anyway - database operations may fail until connection is restored.");
+});
