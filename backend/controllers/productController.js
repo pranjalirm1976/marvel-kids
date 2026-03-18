@@ -25,11 +25,16 @@ const createProduct = async (req, res) => {
       productData.featured = productData.featured === "true";
     }
 
-    // If a file was uploaded, send it to Cloudinary
+    // If a file was uploaded, try sending it to Cloudinary.
+    // Do not block product creation if image upload fails.
     if (req.file) {
-      const imageUrl = await uploadImage(req.file.buffer);
-      productData.images = productData.images || [];
-      productData.images.push(imageUrl);
+      try {
+        const imageUrl = await uploadImage(req.file.buffer);
+        productData.images = productData.images || [];
+        productData.images.push(imageUrl);
+      } catch (uploadErr) {
+        console.error("Image upload failed during product create:", uploadErr.message);
+      }
     }
 
     const product = await Product.create(productData);
@@ -90,6 +95,18 @@ const updateProduct = async (req, res) => {
     // Parse boolean fields from string
     if (typeof updateData.featured === "string") {
       updateData.featured = updateData.featured === "true";
+    }
+
+    // If a new file was uploaded, try sending it to Cloudinary.
+    // Do not block product update if image upload fails.
+    if (req.file) {
+      try {
+        const imageUrl = await uploadImage(req.file.buffer);
+        updateData.images = updateData.images || [];
+        updateData.images.push(imageUrl);
+      } catch (uploadErr) {
+        console.error("Image upload failed during product update:", uploadErr.message);
+      }
     }
 
     const product = await Product.findByIdAndUpdate(req.params.id, updateData, {

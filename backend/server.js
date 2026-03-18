@@ -41,6 +41,29 @@ app.use((req, res, next) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
 });
 
+// --------------- Error Handler ---------------
+app.use((err, _req, res, _next) => {
+  if (err?.code === "LIMIT_FILE_SIZE") {
+    return res.status(400).json({
+      success: false,
+      message: "Image is too large. Maximum allowed size is 15MB.",
+    });
+  }
+
+  if (err?.name === "MulterError") {
+    return res.status(400).json({
+      success: false,
+      message: err.message || "Invalid file upload request.",
+    });
+  }
+
+  if (err?.message) {
+    return res.status(400).json({ success: false, message: err.message });
+  }
+
+  return res.status(500).json({ success: false, message: "Internal server error" });
+});
+
 // --------------- Database Connection & Server Start ---------------
 const startServer = async () => {
   await connectDB();

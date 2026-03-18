@@ -1,9 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Check, Star, Heart, Eye } from "lucide-react";
 import { useState } from "react";
 import useCartStore from "@/store/useCartStore";
+
+const getDeterministicReviewCount = (id) => {
+  const source = String(id || "review-fallback");
+  let hash = 0;
+  for (let i = 0; i < source.length; i += 1) {
+    hash = (hash * 31 + source.charCodeAt(i)) >>> 0;
+  }
+  return 50 + (hash % 500);
+};
 
 export default function ProductCard({ product }) {
   const addToCart = useCartStore((s) => s.addToCart);
@@ -30,7 +40,7 @@ export default function ProductCard({ product }) {
     : 0;
 
   const rating = product.rating || 4.2;
-  const reviewCount = product.reviewCount || Math.floor(Math.random() * 500) + 50;
+  const reviewCount = product.reviewCount || getDeterministicReviewCount(product._id);
 
   return (
     <Link
@@ -46,10 +56,12 @@ export default function ProductCard({ product }) {
           )}
 
           {product.images && product.images[0] ? (
-            <img
+            <Image
               src={product.images[0]}
               alt={product.name}
-              className={`h-full w-full object-cover img-zoom transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className={`object-cover img-zoom transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               onLoad={() => setImageLoaded(true)}
             />
           ) : (
@@ -112,10 +124,12 @@ export default function ProductCard({ product }) {
 
           {/* Second image on hover (if available) */}
           {product.images?.[1] && (
-            <img
+            <Image
               src={product.images[1]}
               alt={`${product.name} alternate`}
-              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="absolute inset-0 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             />
           )}
         </div>

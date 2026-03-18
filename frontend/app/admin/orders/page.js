@@ -9,6 +9,27 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onr
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadOrders = async () => {
+      try {
+        const { data } = await axios.get(`${API_BASE}/api/orders`);
+        if (isMounted) {
+          setOrders(data.orders);
+        }
+      } catch (err) {
+        console.error("Failed to fetch orders:", err);
+      }
+    };
+
+    loadOrders();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const fetchOrders = async () => {
     try {
       const { data } = await axios.get(`${API_BASE}/api/orders`);
@@ -17,10 +38,6 @@ export default function AdminOrdersPage() {
       console.error("Failed to fetch orders:", err);
     }
   };
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {

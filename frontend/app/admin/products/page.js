@@ -111,18 +111,43 @@ export default function AdminProductsPage() {
   // ---- Create or Update product ----
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const priceNumber = Number(formData.price);
+    const mrpNumber = Number(formData.mrp);
+    const stockNumber = Number(formData.stock);
+
+    if (!Number.isFinite(priceNumber) || priceNumber <= 0) {
+      alert("Please enter a valid selling price greater than 0.");
+      return;
+    }
+
+    if (!Number.isFinite(mrpNumber) || mrpNumber <= 0) {
+      alert("Please enter a valid MRP greater than 0.");
+      return;
+    }
+
+    if (!Number.isFinite(stockNumber) || stockNumber < 0) {
+      alert("Please enter a valid stock value (0 or more).");
+      return;
+    }
+
+    if (formData.image && formData.image.size > 15 * 1024 * 1024) {
+      alert("Selected image is too large. Please upload an image up to 15MB.");
+      return;
+    }
+
     setLoading(true);
 
     try {
       const data = new FormData();
       data.append("name", formData.name);
       data.append("description", formData.description);
-      data.append("price", Math.round(Number(formData.price) * 100));
-      data.append("mrp", Math.round(Number(formData.mrp) * 100));
+      data.append("price", Math.round(priceNumber * 100));
+      data.append("mrp", Math.round(mrpNumber * 100));
       data.append("category", formData.category);
       data.append("subcategory", formData.subcategory);
       data.append("brand", formData.brand);
-      data.append("stock", Number(formData.stock));
+      data.append("stock", stockNumber);
       data.append("featured", formData.featured);
 
       // Send arrays as JSON strings
@@ -152,7 +177,13 @@ export default function AdminProductsPage() {
       setShowForm(false);
     } catch (err) {
       console.error("Failed to save product:", err.message);
-      alert("Failed to save product. Please check all fields.");
+      const responseData = err.response?.data;
+      const apiMessage =
+        typeof responseData === "string"
+          ? responseData
+          : responseData?.message || responseData?.error;
+      const fallbackMessage = err.message || "Please check all fields.";
+      alert(`Failed to save product: ${apiMessage || fallbackMessage}`);
     } finally {
       setLoading(false);
     }
