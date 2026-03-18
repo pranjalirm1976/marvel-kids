@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      connectTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 15000,
+      retryWrites: true,
+      w: "majority",
+    });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    return true;
   } catch (err) {
     console.error(`MongoDB connection error: ${err.message}`);
-    process.exit(1);
+    console.warn("Warning: Starting server without database connection. API will return errors until DB connects.");
+    return false;
   }
 };
 
