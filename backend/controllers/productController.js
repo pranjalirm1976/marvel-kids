@@ -1,11 +1,25 @@
 const Product = require("../models/Product");
 const { uploadImage } = require("../utils/cloudinary");
+const mongoose = require("mongoose");
+
+const ensureDbConnected = (res) => {
+  if (mongoose.connection.readyState !== 1) {
+    res.status(503).json({
+      success: false,
+      message: "Database is currently unavailable. Please try again in a few moments.",
+    });
+    return false;
+  }
+  return true;
+};
 
 // @desc    Create a new product
 // @route   POST /api/products
 // @access  Public (will be Admin-only later)
 const createProduct = async (req, res) => {
   try {
+    if (!ensureDbConnected(res)) return;
+
     const productData = { ...req.body };
 
     // Parse array fields if sent as JSON strings (multipart form)
@@ -49,6 +63,8 @@ const createProduct = async (req, res) => {
 // @access  Public
 const getProducts = async (_req, res) => {
   try {
+    if (!ensureDbConnected(res)) return;
+
     const products = await Product.find();
     res.status(200).json({ success: true, count: products.length, data: products });
   } catch (err) {
@@ -61,6 +77,8 @@ const getProducts = async (_req, res) => {
 // @access  Public
 const getProductById = async (req, res) => {
   try {
+    if (!ensureDbConnected(res)) return;
+
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -78,6 +96,8 @@ const getProductById = async (req, res) => {
 // @access  Public (will be Admin-only later)
 const updateProduct = async (req, res) => {
   try {
+    if (!ensureDbConnected(res)) return;
+
     const updateData = { ...req.body };
 
     // Parse array fields if sent as JSON strings (multipart form)
@@ -129,6 +149,8 @@ const updateProduct = async (req, res) => {
 // @access  Public (will be Admin-only later)
 const deleteProduct = async (req, res) => {
   try {
+    if (!ensureDbConnected(res)) return;
+
     const product = await Product.findByIdAndDelete(req.params.id);
 
     if (!product) {

@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// Fail fast instead of buffering model operations while disconnected.
+mongoose.set("bufferCommands", false);
+
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {

@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const mongoose = require("mongoose");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -24,9 +25,13 @@ app.get("/", (req, res) => {
 
 // Health-check route
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    message: "Server is up and running!",
+  const isDbConnected = mongoose.connection.readyState === 1;
+  res.status(isDbConnected ? 200 : 503).json({
+    status: isDbConnected ? "success" : "degraded",
+    message: isDbConnected
+      ? "Server and database are up and running!"
+      : "Server is running but database is disconnected.",
+    database: isDbConnected ? "connected" : "disconnected",
   });
 });
 
