@@ -18,35 +18,35 @@ async function getProducts() {
 
 const categories = [
   {
-    name: "Men",
+    name: "Boys",
     tag: "TRENDING",
-    desc: "Streetwear, tees, hoodies & more",
-    href: "/shop?category=Men",
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&h=800&fit=crop",
+    desc: "Tees, joggers, hoodies & school-ready fits",
+    href: "/shop?category=Boys",
+    image: "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=600&h=800&fit=crop",
     gradient: "from-slate-900/95 via-slate-900/70 to-transparent",
   },
   {
-    name: "Women",
+    name: "Girls",
     tag: "NEW DROPS",
-    desc: "Tops, dresses, joggers & more",
-    href: "/shop?category=Women",
-    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=800&fit=crop",
+    desc: "Dresses, tops, co-ords & activewear",
+    href: "/shop?category=Girls",
+    image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=600&h=800&fit=crop",
     gradient: "from-rose-950/95 via-rose-900/70 to-transparent",
   },
   {
-    name: "Accessories",
+    name: "Sports",
     tag: "HOT",
-    desc: "Caps, bags, watches & more",
-    href: "/shop?category=Accessories",
-    image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=800&fit=crop",
+    desc: "Performance sets, jerseys & training gear",
+    href: "/shop?category=Sports",
+    image: "https://images.unsplash.com/photo-1542766788-a2f588f447ee?w=600&h=800&fit=crop",
     gradient: "from-amber-950/95 via-amber-900/70 to-transparent",
   },
 ];
 
 const offers = [
-  { title: "FLAT 50% OFF", subtitle: "Men's Collection", code: "MARVELS50", bg: "bg-gradient-to-br from-violet-600 to-indigo-800", icon: "🔥" },
-  { title: "BUY 2 GET 1", subtitle: "Women's Collection", code: "B2G1", bg: "bg-gradient-to-br from-rose-500 to-pink-700", icon: "💫" },
-  { title: "UNDER ₹499", subtitle: "Trending Picks", code: "UNDER499", bg: "bg-gradient-to-br from-amber-500 to-orange-700", icon: "⚡" },
+  { title: "FLAT 50% OFF", subtitle: "Premium Kids Wear", code: "MARVELS50", bg: "bg-gradient-to-br from-violet-600 to-indigo-800" },
+  { title: "BUY 2 GET 1", subtitle: "Junior Sports Gear", code: "B2G1", bg: "bg-gradient-to-br from-rose-500 to-pink-700" },
+  { title: "UNDER ₹499", subtitle: "Everyday Kids Essentials", code: "UNDER499", bg: "bg-gradient-to-br from-amber-500 to-orange-700" },
 ];
 
 const trustBadges = [
@@ -64,8 +64,9 @@ const trendingSearches = [
 export default async function Home() {
   const products = await getProducts();
 
-  const menProducts = products.filter((p) => p.category === "Men" || p.category === "Boys");
-  const womenProducts = products.filter((p) => p.category === "Women" || p.category === "Girls");
+  const boysProducts = products.filter((p) => p.category === "Boys");
+  const girlsProducts = products.filter((p) => p.category === "Girls");
+  const sportsProducts = products.filter((p) => p.category === "Sports");
   const featuredProducts = products.filter((p) => p.featured);
 
   return (
@@ -95,22 +96,22 @@ export default async function Home() {
             </div>
 
             <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl animate-fade-in-up">
-              STYLE THAT
+              KIDS
               <br />
-              <span className="gradient-text">SPEAKS</span>
+              <span className="gradient-text">PREMIUM</span>
               <br />
-              LOUD.
+              WEAR
             </h1>
 
             <p className="mt-6 max-w-lg text-base leading-relaxed text-gray-400 sm:text-lg animate-fade-in-up" style={{ animationDelay: "0.15s" }}>
-              Premium fashion at prices that don&apos;t burn. Trendsetting designs crafted for those who dare to stand out.
+              Premium Kids Wear and Junior Sports Gear designed for comfort, movement, and everyday confidence.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.25s" }}>
               <Link href="/shop" className="btn-brand">
                 Shop Now <ArrowRight size={16} />
               </Link>
-              <Link href="/shop?category=Men" className="btn-brand-outline">
+              <Link href="/shop?category=Sports" className="btn-brand-outline">
                 Explore Collections
               </Link>
             </div>
@@ -137,18 +138,18 @@ export default async function Home() {
               <div className="relative grid grid-cols-2 gap-3">
                 <div className="space-y-3">
                   <div className="overflow-hidden aspect-[3/4] animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-                    <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400&h=530&fit=crop" alt="Men fashion" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
+                    <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=400&h=530&fit=crop" alt="Boys collection" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
                   </div>
                   <div className="overflow-hidden aspect-square animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=400&fit=crop" alt="Accessories" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
+                    <img src="https://images.unsplash.com/photo-1542766788-a2f588f447ee?w=400&h=400&fit=crop" alt="Sports gear" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
                   </div>
                 </div>
                 <div className="space-y-3 pt-10">
                   <div className="overflow-hidden aspect-square animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=400&fit=crop" alt="Women fashion" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
+                    <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop" alt="Girls collection" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
                   </div>
                   <div className="overflow-hidden aspect-[3/4] animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=530&fit=crop" alt="Streetwear" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&h=530&fit=crop" alt="Junior sportswear" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
                   </div>
                 </div>
               </div>
@@ -156,7 +157,7 @@ export default async function Home() {
               {/* Floating label */}
               <div className="absolute -left-4 bottom-20 bg-[#ffd60a] px-5 py-3 shadow-2xl animate-float">
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#0d0d0d]">Trending Now</p>
-                <p className="text-sm font-black text-[#0d0d0d]">Oversized Collection</p>
+                <p className="text-sm font-black text-[#0d0d0d]">Premium Kids Wear</p>
               </div>
             </div>
           </div>
@@ -226,14 +227,13 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {offers.map((offer) => (
+            {offers.map((offer) => (
             <Link
               key={offer.code}
               href="/shop"
               className={`group relative overflow-hidden ${offer.bg} p-7 text-white transition-all hover:scale-[1.02] hover:shadow-2xl`}
             >
               <div className="relative z-10">
-                <span className="text-3xl">{offer.icon}</span>
                 <p className="mt-2 text-3xl font-black tracking-tight sm:text-2xl lg:text-3xl">{offer.title}</p>
                 <p className="mt-1 text-sm font-medium text-white/80">{offer.subtitle}</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded bg-white/20 px-4 py-2 text-[10px] font-black tracking-widest backdrop-blur-sm border border-white/10">
@@ -344,7 +344,7 @@ export default async function Home() {
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=700&fit=crop"
-            alt="Fashion lifestyle"
+            alt="Kids and sports lifestyle"
             className="h-full w-full object-cover opacity-15"
           />
         </div>
@@ -356,10 +356,10 @@ export default async function Home() {
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#ffd60a]">Premium Collection</span>
             </div>
             <h2 className="text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
-              Wear Your<br /><span className="gradient-text">Confidence</span>
+              Premium Kids<br /><span className="gradient-text">Wear</span>
             </h2>
             <p className="mt-4 max-w-md text-base text-gray-400">
-              Bold designs, premium fabrics, and styles that make you stand out. Fashion isn&apos;t just clothes — it&apos;s attitude.
+              Comfortable fits, durable fabrics, and active styles built for kids and junior athletes.
             </p>
           </div>
           <div className="mt-10 lg:mt-0">
@@ -372,24 +372,24 @@ export default async function Home() {
 
 
       {/* ========================================= */}
-      {/* ===== MEN'S COLLECTION ===== */}
+      {/* ===== BOYS COLLECTION ===== */}
       {/* ========================================= */}
-      {menProducts.length > 0 && (
+      {boysProducts.length > 0 && (
         <section className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">For Him</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">For Boys</span>
                 <h2 className="mt-1 text-2xl font-black uppercase tracking-tight text-[#0d0d0d] sm:text-3xl">
-                  Men&apos;s Collection
+                  Boys Collection
                 </h2>
               </div>
-              <Link href="/shop?category=Men" className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0d0d0d] hover:text-[#ffd60a] transition-colors group">
+              <Link href="/shop?category=Boys" className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0d0d0d] hover:text-[#ffd60a] transition-colors group">
                 View All <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 stagger-children">
-              {menProducts.slice(0, 5).map((product) => (
+              {boysProducts.slice(0, 5).map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
@@ -403,16 +403,16 @@ export default async function Home() {
       {/* ========================================= */}
       <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Link href="/shop?category=Men" className="group relative overflow-hidden aspect-[2/1] bg-gradient-to-br from-[#0d0d0d] to-[#2d2d2d]">
+          <Link href="/shop?category=Sports" className="group relative overflow-hidden aspect-[2/1] bg-gradient-to-br from-[#0d0d0d] to-[#2d2d2d]">
             <img
-              src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&h=400&fit=crop"
-              alt="Men's fashion"
+              src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=400&fit=crop"
+              alt="Junior sports"
               className="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d]/80 to-transparent" />
             <div className="relative flex h-full items-center p-8">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#ffd60a]">Men&apos;s Store</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#ffd60a]">Sports Store</span>
                 <h3 className="mt-2 text-2xl font-black uppercase text-white">Up to 60% Off</h3>
                 <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-white/70 group-hover:text-[#ffd60a] transition-colors">
                   Shop Now <ArrowRight size={12} />
@@ -420,16 +420,16 @@ export default async function Home() {
               </div>
             </div>
           </Link>
-          <Link href="/shop?category=Women" className="group relative overflow-hidden aspect-[2/1] bg-gradient-to-br from-rose-900 to-rose-950">
+          <Link href="/shop?category=Girls" className="group relative overflow-hidden aspect-[2/1] bg-gradient-to-br from-rose-900 to-rose-950">
             <img
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&h=400&fit=crop"
-              alt="Women's fashion"
+              src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=800&h=400&fit=crop"
+              alt="Girls collection"
               className="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-rose-950/80 to-transparent" />
             <div className="relative flex h-full items-center p-8">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#ffd60a]">Women&apos;s Store</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#ffd60a]">Girls Store</span>
                 <h3 className="mt-2 text-2xl font-black uppercase text-white">New Arrivals</h3>
                 <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-white/70 group-hover:text-[#ffd60a] transition-colors">
                   Shop Now <ArrowRight size={12} />
@@ -442,24 +442,51 @@ export default async function Home() {
 
 
       {/* ========================================= */}
-      {/* ===== WOMEN'S COLLECTION ===== */}
+      {/* ===== GIRLS COLLECTION ===== */}
       {/* ========================================= */}
-      {womenProducts.length > 0 && (
+      {girlsProducts.length > 0 && (
         <section className="bg-[#fafafa]">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-rose-500">For Her</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-rose-500">For Girls</span>
                 <h2 className="mt-1 text-2xl font-black uppercase tracking-tight text-[#0d0d0d] sm:text-3xl">
-                  Women&apos;s Collection
+                  Girls Collection
                 </h2>
               </div>
-              <Link href="/shop?category=Women" className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0d0d0d] hover:text-[#ffd60a] transition-colors group">
+              <Link href="/shop?category=Girls" className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0d0d0d] hover:text-[#ffd60a] transition-colors group">
                 View All <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 stagger-children">
-              {womenProducts.slice(0, 5).map((product) => (
+              {girlsProducts.slice(0, 5).map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* ========================================= */}
+      {/* ===== SPORTS COLLECTION ===== */}
+      {/* ========================================= */}
+      {sportsProducts.length > 0 && (
+        <section className="bg-white">
+          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-500">Active Kids</span>
+                <h2 className="mt-1 text-2xl font-black uppercase tracking-tight text-[#0d0d0d] sm:text-3xl">
+                  Sports Collection
+                </h2>
+              </div>
+              <Link href="/shop?category=Sports" className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0d0d0d] hover:text-[#ffd60a] transition-colors group">
+                View All <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 stagger-children">
+              {sportsProducts.slice(0, 5).map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
@@ -481,14 +508,14 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
             {[
-              { icon: "🎨", title: "1000+ Designs", desc: "Fresh styles added every week" },
-              { icon: "🧵", title: "Premium Fabric", desc: "100% quality cotton & blends" },
-              { icon: "💰", title: "Best Prices", desc: "Fashion that won't break the bank" },
-              { icon: "🚀", title: "Fast Delivery", desc: "2-5 day delivery pan India" },
+              { icon: Sparkles, title: "1000+ Designs", desc: "Fresh kids styles added every week" },
+              { icon: Shield, title: "Premium Fabric", desc: "Comfort-first quality for active children" },
+              { icon: Gift, title: "Best Prices", desc: "Premium kids wear at family-friendly prices" },
+              { icon: Truck, title: "Fast Delivery", desc: "2-5 day delivery pan India" },
             ].map((item) => (
               <div key={item.title} className="text-center group">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-3xl mb-4 group-hover:bg-[#ffd60a]/10 transition-colors">
-                  {item.icon}
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/5 mb-4 group-hover:bg-[#ffd60a]/10 transition-colors">
+                  <item.icon size={24} className="text-[#ffd60a]" />
                 </div>
                 <h3 className="text-sm font-extrabold uppercase tracking-wider text-white">{item.title}</h3>
                 <p className="mt-1 text-xs text-gray-500">{item.desc}</p>
@@ -512,7 +539,7 @@ export default async function Home() {
                 Never Miss a Drop
               </h2>
               <p className="mt-2 text-sm font-medium text-[#0d0d0d]/60">
-                Get early access to sales, new arrivals & member-only deals. Join 50K+ fashion lovers.
+                Get early access to sales, new arrivals & member-only deals for Kids & Sports wear.
               </p>
             </div>
             <div className="mt-8 flex w-full max-w-md gap-2 lg:mt-0">

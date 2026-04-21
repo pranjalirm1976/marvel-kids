@@ -23,9 +23,17 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Category is required"],
       enum: {
-        values: ["Men", "Women", "Kids", "Accessories", "Boys", "Girls", "Unisex", "Sports"],
+        values: ["Boys", "Girls", "Sports", "Newborns", "Infants", "Toddlers", "Preschoolers", "School-age"],
         message: "{VALUE} is not a valid category",
       },
+    },
+    subCategory: {
+      type: String,
+      trim: true, // e.g. "0-2 months", "3-6 months", "7-12 years"
+    },
+    ageRange: {
+      type: String,
+      trim: true, // e.g. "0-2 months", "3-6 months", "4-6 years"
     },
     subcategory: {
       type: String,

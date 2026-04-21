@@ -1,7 +1,7 @@
 # Marvel Kids & Sports Wear - Project State
 
 ## 🎯 Vision
-A modern, mobile-first kids clothing e-commerce platform for the Indian market, designed to scale into a multi-vendor SaaS later. Premium Bewakoof-style streetwear aesthetic.
+A modern, mobile-first Kids & Sports wear e-commerce platform for the Indian market, designed to scale into a multi-vendor SaaS later. Premium Bewakoof-style streetwear aesthetic.
 
 ## 🛠️ Tech Stack
 - **Frontend:** Next.js 14 (App Router), Tailwind CSS v4, Zustand, Lucide React
@@ -37,6 +37,8 @@ A modern, mobile-first kids clothing e-commerce platform for the Indian market, 
 - [x] Frontend Checkout Page with Razorpay & COD support
 - [x] Build Admin Orders Dashboard
 - [x] Review and Prepare for Vercel/Render Deployment
+- [x] Implemented Anti-Gravity Auto-Location Address Filling
+- [x] Integrated End-to-End Payment & Logistics (Shiprocket)
 - [x] Backend Production Routing & Health Check verified
 
 ### 🚀 Deployment & Production
@@ -44,6 +46,9 @@ A modern, mobile-first kids clothing e-commerce platform for the Indian market, 
 - [x] GitHub Repository Synced
 - [x] Render Deployment Live
 - [ ] Vercel Frontend Deployment
+
+### 🔄 Migration Note
+Backend categories updated for Kids & Sports specialization.
 
 ### 🎨 Premium Bewakoof-Style Redesign
 - [x] Brand design system (CSS custom properties, animations, utility classes)
@@ -58,13 +63,24 @@ A modern, mobile-first kids clothing e-commerce platform for the Indian market, 
 - [x] Checkout page — Secure checkout header, brand payment options
 
 ## 📋 Next Immediate Goal
-Final Production Smoke Test
+Final Vercel Frontend Deployment
 
-## 🔑 Vercel Environment Variables
+## 🔑 Environment Variables
+### Vercel (Frontend)
 | Variable | Description |
 |----------|-------------|
 | `NEXT_PUBLIC_API_URL` | Your Render backend URL (e.g. `https://marvel-kids-api.onrender.com`) |
 | `NEXT_PUBLIC_RAZORPAY_KEY_ID` | Your Razorpay public key for checkout integration |
+
+### Render (Backend)
+| Variable | Description |
+|----------|-------------|
+| `RAZORPAY_KEY_ID` | Razorpay key ID |
+| `RAZORPAY_KEY_SECRET` | Razorpay key secret |
+| `SHIPROCKET_EMAIL` | Your Shiprocket account email |
+| `SHIPROCKET_PASSWORD` | Your Shiprocket account password |
+| `MONGO_URI` | MongoDB Atlas connection string |
+| `CLOUDINARY_*` | Cloudinary image upload credentials |
 
 ---
 

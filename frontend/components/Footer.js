@@ -3,10 +3,11 @@ import { Instagram, Twitter, Facebook, Youtube, Mail, Phone, MapPin, ArrowRight,
 
 const shopLinks = [
   { label: "Shop All", href: "/shop" },
-  { label: "Men", href: "/shop?category=Men" },
-  { label: "Women", href: "/shop?category=Women" },
-  { label: "Kids", href: "/shop?category=Kids" },
-  { label: "Accessories", href: "/shop?category=Accessories" },
+  { label: "Boys", href: "/shop?category=Boys" },
+  { label: "Girls", href: "/shop?category=Girls" },
+  { label: "Sports", href: "/shop?category=Sports" },
+  { label: "Newborns", href: "/shop?category=Newborns" },
+  { label: "School-age", href: "/shop?category=School-age" },
   { label: "New Arrivals", href: "/shop" },
 ];
 
@@ -72,7 +73,7 @@ export default function Footer() {
               <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#ffd60a] -mt-0.5">fashion</p>
             </Link>
             <p className="mt-4 text-xs leading-5 text-gray-500 max-w-[220px]">
-              India&apos;s trendiest fashion brand. Bold styles, unbeatable prices, and fashion that speaks for itself.
+              India&apos;s premier destination for Kids Wear and Junior Sports Gear.
             </p>
             {/* Socials */}
             <div className="mt-5 flex gap-2">

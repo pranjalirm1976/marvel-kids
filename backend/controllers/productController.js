@@ -1,6 +1,6 @@
+const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const { uploadImage } = require("../utils/cloudinary");
-const mongoose = require("mongoose");
 
 const ensureDbConnected = (res) => {
   if (mongoose.connection.readyState !== 1) {

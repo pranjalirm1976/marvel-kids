@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
 const Order = require("../models/Order");
+const { createShipment } = require("../utils/shipping");
 
 // Lazy Razorpay instance — only created when needed (avoids crash if keys missing)
 let _razorpay = null;
@@ -120,12 +121,13 @@ const verifyPayment = async (req, res) => {
         .json({ success: false, message: "Payment verification failed" });
     }
 
-    // Update order in DB
+    // Mark order as paid
     const order = await Order.findOneAndUpdate(
       { razorpayOrderId: razorpay_order_id },
       {
         paymentStatus: "Completed",
         razorpayPaymentId: razorpay_payment_id,
+        orderStatus: "Processing",
       },
       { new: true }
     );
@@ -136,11 +138,24 @@ const verifyPayment = async (req, res) => {
         .json({ success: false, message: "Order not found" });
     }
 
-    res.status(200).json({ success: true, message: "Payment verified", order });
+    // Respond to client immediately — don't block on shipping
+    res.status(200).json({
+      success: true,
+      message: "Payment verified",
+      orderId: order._id,
+      order,
+    });
+
+    // Trigger Shiprocket shipment creation asynchronously (non-blocking)
+    createShipment(order).catch((err) => {
+      console.error("[Shiprocket] Failed to create shipment for order", order._id, ":", err.message);
+    });
+
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
 
 // @desc    Get all orders
 // @route   GET /api/orders
@@ -178,4 +193,19 @@ const updateOrderStatus = async (req, res) => {
   }
 };
 
-module.exports = { createOrder, verifyPayment, getOrders, updateOrderStatus };
+// @desc    Get single order by ID
+// @route   GET /api/orders/:id
+// @access  Public (order owner uses this from success page)
+const getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+    res.status(200).json({ success: true, order });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+module.exports = { createOrder, verifyPayment, getOrders, getOrderById, updateOrderStatus };

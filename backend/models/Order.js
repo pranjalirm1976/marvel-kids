@@ -58,6 +58,10 @@ const orderSchema = new mongoose.Schema(
     },
     razorpayOrderId: { type: String },
     razorpayPaymentId: { type: String },
+    // Shiprocket logistics
+    shipmentId: { type: String, default: null },
+    awbCode: { type: String, default: null },
+    trackingUrl: { type: String, default: null },
     storeId: {
       type: String,
       default: "MarvelKids",

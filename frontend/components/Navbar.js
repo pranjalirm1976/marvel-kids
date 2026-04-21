@@ -7,28 +7,25 @@ import useCartStore from "@/store/useCartStore";
 
 const navLinks = [
   {
-    label: "Men",
-    href: "/shop?category=Men",
-    submenu: [
-      { label: "T-Shirts", href: "/shop?category=Men&sub=T-Shirts" },
-      { label: "Shirts", href: "/shop?category=Men&sub=Shirts" },
-      { label: "Hoodies", href: "/shop?category=Men&sub=Hoodies" },
-      { label: "Joggers", href: "/shop?category=Men&sub=Joggers" },
-      { label: "Jeans", href: "/shop?category=Men&sub=Jeans" },
-    ],
+    label: "Boys",
+    href: "/shop?category=Boys",
   },
   {
-    label: "Women",
-    href: "/shop?category=Women",
+    label: "Girls",
+    href: "/shop?category=Girls",
+  },
+  { label: "Sports", href: "/shop?category=Sports" },
+  {
+    label: "Kids",
+    href: "/shop",
     submenu: [
-      { label: "Tops", href: "/shop?category=Women&sub=Tops" },
-      { label: "Dresses", href: "/shop?category=Women&sub=Dresses" },
-      { label: "Hoodies", href: "/shop?category=Women&sub=Hoodies" },
-      { label: "Joggers", href: "/shop?category=Women&sub=Joggers" },
+      { label: "Newborns (0-2 months)", href: "/shop?category=Newborns&subCategory=0-2 months" },
+      { label: "Infants", href: "/shop?category=Infants" },
+      { label: "Toddlers", href: "/shop?category=Toddlers" },
+      { label: "Preschoolers", href: "/shop?category=Preschoolers" },
+      { label: "School-age children", href: "/shop?category=School-age" },
     ],
   },
-  { label: "Kids", href: "/shop?category=Kids" },
-  { label: "Accessories", href: "/shop?category=Accessories" },
   { label: "New Arrivals", href: "/shop", hot: true },
 ];
 

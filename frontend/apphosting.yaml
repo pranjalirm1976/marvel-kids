@@ -1,0 +1,19 @@
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_API_URL
+    value: https://marvel-kids-api.onrender.com
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_RAZORPAY_KEY_ID
+    secret: NEXT_PUBLIC_RAZORPAY_KEY_ID
+    availability:
+      - BUILD
+      - RUNTIME

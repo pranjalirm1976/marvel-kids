@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ShoppingBag, Check, Star, Heart, Eye } from "lucide-react";
 import { useState } from "react";
 import useCartStore from "@/store/useCartStore";
@@ -16,6 +17,7 @@ const getDeterministicReviewCount = (id) => {
 };
 
 export default function ProductCard({ product }) {
+  const router = useRouter();
   const addToCart = useCartStore((s) => s.addToCart);
   const [added, setAdded] = useState(false);
   const [wishlisted, setWishlisted] = useState(false);
@@ -113,13 +115,13 @@ export default function ProductCard({ product }) {
               {added ? <Check size={14} strokeWidth={3} /> : <ShoppingBag size={14} />}
               {added ? "Added!" : "Add to Bag"}
             </button>
-            <Link
-              href={`/product/${product._id}`}
+            <button
+              type="button"
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(`/product/${product._id}`); }}
               className="flex items-center justify-center bg-[#0d0d0d] px-4 text-white hover:bg-[#1a1a1a] transition-colors"
-              onClick={(e) => e.stopPropagation()}
             >
               <Eye size={16} />
-            </Link>
+            </button>
           </div>
 
           {/* Second image on hover (if available) */}
