@@ -25,6 +25,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: [true, "Customer email is required"],
     },
+    phone: {
+      type: String,
+      default: "",
+    },
     address: {
       type: String,
       required: [true, "Delivery address is required"],

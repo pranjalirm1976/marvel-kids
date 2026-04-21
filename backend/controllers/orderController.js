@@ -23,7 +23,7 @@ function getRazorpay() {
 // @access  Public
 const createOrder = async (req, res) => {
   try {
-    const { user, email, address, items, paymentMethod } = req.body;
+    const { user, email, address, phone, items, paymentMethod } = req.body;
 
     if (!items || items.length === 0) {
       return res
@@ -43,6 +43,7 @@ const createOrder = async (req, res) => {
         user,
         email,
         address,
+        phone,
         items: items.map((i) => ({
           product: i._id,
           name: i.name,
@@ -72,6 +73,7 @@ const createOrder = async (req, res) => {
         user,
         email,
         address,
+        phone,
         items: items.map((i) => ({
           product: i._id,
           name: i.name,

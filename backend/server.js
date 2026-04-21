@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const mongoose = require("mongoose");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,33 +17,15 @@ app.use(express.json());
 
 // --------------- Routes ---------------
 
-// Root route
-app.get("/", (req, res) => {
-  res.status(200).send("Marvel Kids API is running successfully.");
-});
+app.get('/api/health', (req, res) => res.status(200).json({ status: 'success', message: 'Server is live' }));
 
-// Health-check route
-app.get("/api/health", (req, res) => {
-  const isDbConnected = mongoose.connection.readyState === 1;
-  res.status(isDbConnected ? 200 : 503).json({
-    status: isDbConnected ? "success" : "degraded",
-    message: isDbConnected
-      ? "Server and database are up and running!"
-      : "Server is running but database is disconnected.",
-    database: isDbConnected ? "connected" : "disconnected",
-  });
-});
+app.get('/', (req, res) => res.status(200).send('Marvel Kids API is running.'));
 
 // Product routes
 app.use("/api/products", productRoutes);
 
 // Order routes
 app.use("/api/orders", orderRoutes);
-
-// --------------- 404 Handler ---------------
-app.use((req, res, next) => {
-  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
-});
 
 // --------------- Error Handler ---------------
 app.use((err, _req, res, _next) => {
@@ -67,6 +48,10 @@ app.use((err, _req, res, _next) => {
   }
 
   return res.status(500).json({ success: false, message: "Internal server error" });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
 });
 
 // --------------- Database Connection & Server Start ---------------
