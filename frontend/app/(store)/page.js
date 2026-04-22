@@ -34,7 +34,7 @@ const categoryCards = [
 
 export default function Home() {
   return (
-    <div className="bg-[#ececec] pb-12">
+    <div className="bg-[#e9e9e9] pb-12">
       <section className="bg-[#08090b]">
         <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
           <div className="flex items-center px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
@@ -46,7 +46,7 @@ export default function Home() {
                 Girls
               </h1>
               <p className="mt-5 max-w-sm text-2xl font-semibold leading-snug text-gray-200">
-                Stylish and adorable outfits for every little princess.
+                Stylish &amp; adorable outfits for every little princess.
               </p>
               <p className="mt-5 text-base font-semibold text-slate-400">0 products available</p>
             </div>

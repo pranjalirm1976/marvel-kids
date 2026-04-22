@@ -7,25 +7,14 @@ import useCartStore from "@/store/useCartStore";
 
 const navLinks = [
   {
-    label: "Boys",
-    href: "/shop?category=Boys",
-  },
-  {
     label: "Girls",
     href: "/shop?category=Girls",
   },
-  { label: "Sports Wear", href: "/shop?category=Sports" },
   {
-    label: "Kids",
-    href: "/shop",
-    submenu: [
-      { label: "Newborns (0-2 months)", href: "/shop?category=Newborns&subCategory=0-2 months" },
-      { label: "Infants", href: "/shop?category=Infants" },
-      { label: "Toddlers", href: "/shop?category=Toddlers" },
-      { label: "Preschoolers", href: "/shop?category=Preschoolers" },
-      { label: "School-age children", href: "/shop?category=School-age" },
-    ],
+    label: "Boys",
+    href: "/shop?category=Boys",
   },
+  { label: "Sports Wear", href: "/shop?category=Sports" },
   { label: "New Arrivals", href: "/shop", hot: true },
 ];
 
