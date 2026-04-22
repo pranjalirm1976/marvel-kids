@@ -14,7 +14,7 @@ const navLinks = [
     label: "Girls",
     href: "/shop?category=Girls",
   },
-  { label: "Sports", href: "/shop?category=Sports" },
+  { label: "Sports Wear", href: "/shop?category=Sports" },
   {
     label: "Kids",
     href: "/shop",
@@ -108,7 +108,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-0 lg:flex" onMouseLeave={() => setHoveredMenu(null)}>
+          <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setHoveredMenu(null)}>
             {navLinks.map(({ label, href, submenu, hot }) => (
               <div
                 key={label}
