@@ -6,23 +6,89 @@ import { MapPin, CheckCircle, X, Loader2, Navigation } from "lucide-react";
 /* ─── Nominatim reverse-geocode helper ─── */
 async function reverseGeocode(lat, lng) {
   const res = await fetch(
-    `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=jsonv2&addressdetails=1&zoom=18`,
+    `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=jsonv2&addressdetails=1&zoom=19&namedetails=1&extratags=1&accept-language=en`,
     { headers: { Accept: "application/json" } }
   );
   if (!res.ok) throw new Error("Geocode failed");
   const data = await res.json();
   const a = data.address || {};
 
-  const streetParts = [a.house_number, a.road || a.pedestrian || a.footway, a.suburb || a.neighbourhood]
-    .filter(Boolean)
-    .join(", ");
+  const normalize = (value) => (value ? String(value).trim() : "");
+  const dedupe = (parts) => {
+    const seen = new Set();
+    return parts.filter((part) => {
+      const clean = normalize(part);
+      if (!clean) return false;
+      const key = clean.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  };
+
+  const building =
+    a.building ||
+    a.amenity ||
+    a.office ||
+    a.commercial ||
+    a.shop ||
+    a.tourism ||
+    data.name ||
+    data.namedetails?.name ||
+    "";
+
+  const road = a.road || a.pedestrian || a.footway || a.path || a.cycleway || "";
+  const area =
+    a.neighbourhood ||
+    a.suburb ||
+    a.residential ||
+    a.city_district ||
+    a.quarter ||
+    a.hamlet ||
+    "";
+
+  const city = a.city || a.town || a.village || a.municipality || a.county || "";
+  const district = a.state_district || a.county || "";
+  const country = a.country || "India";
+
+  const line1 = dedupe([a.house_number, building, road]).join(", ");
+  const line2 = dedupe([
+    a.neighbourhood,
+    a.suburb,
+    a.residential,
+    a.city_district,
+    a.quarter,
+    a.hamlet,
+    a.city_block,
+  ]).join(", ");
+
+  const localityTrail = dedupe([city, district, a.state, a.postcode, country]).join(", ");
+
+  const fullAddress = dedupe([line1, line2, localityTrail]).join(", ");
+
+  const fallbackAddress = data.display_name
+    ? data.display_name
+        .split(",")
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .join(", ")
+    : "";
 
   return {
-    address: streetParts || data.display_name?.split(",").slice(0, 3).join(", ") || "",
-    city: a.city || a.town || a.village || a.county || "",
+    address: fullAddress || fallbackAddress || "",
+    line1,
+    line2,
+    fullAddress: fullAddress || fallbackAddress || "",
+    landmark: building,
+    area,
+    district,
+    city,
     state: a.state || "",
     pincode: a.postcode || "",
+    country,
     display: data.display_name || "",
+    latitude: lat,
+    longitude: lng,
   };
 }
 
@@ -196,10 +262,17 @@ export default function MapLocationPicker({ initialLat, initialLng, onConfirm, o
                   <MapPin size={14} className="text-[#ff3d3d] mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="text-xs font-bold text-[#0d0d0d] leading-snug">
-                      {addressInfo.address || "Location detected"}
+                      {addressInfo.fullAddress || addressInfo.address || "Location detected"}
                     </p>
+                    {(addressInfo.landmark || addressInfo.area) && (
+                      <p className="text-[10px] text-gray-500 mt-0.5">
+                        {[addressInfo.landmark, addressInfo.area]
+                          .filter(Boolean)
+                          .join(" • ")}
+                      </p>
+                    )}
                     <p className="text-[10px] text-gray-400 mt-0.5">
-                      {[addressInfo.city, addressInfo.state, addressInfo.pincode]
+                      {[addressInfo.city, addressInfo.district, addressInfo.state, addressInfo.pincode]
                         .filter(Boolean)
                         .join(", ")}
                     </p>

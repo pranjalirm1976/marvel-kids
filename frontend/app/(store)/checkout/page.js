@@ -31,7 +31,7 @@ const MapLocationPicker = dynamic(
   { ssr: false }
 );
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/orders`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/order`;
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -184,10 +184,16 @@ export default function CheckoutPage() {
   };
 
   /* Called when user confirms a pin on the map */
-  const handleMapConfirm = ({ address, city, state, pincode }) => {
+  const handleMapConfirm = ({ address, fullAddress, city, district, state, pincode, landmark, area }) => {
+    const deliveryAddress =
+      fullAddress ||
+      [address, landmark, area, city, district, state, pincode]
+        .filter(Boolean)
+        .join(", ");
+
     setFormData((prev) => ({
       ...prev,
-      address: address || prev.address,
+      address: deliveryAddress || prev.address,
       city: city || prev.city,
       state: state || prev.state,
       pincode: pincode || prev.pincode,
