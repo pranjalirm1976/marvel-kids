@@ -11,7 +11,7 @@ const categoryCards = [
     description: "Cool styles for every adventure",
     href: "/shop?category=Boys",
     image:
-      "https://images.unsplash.com/photo-1519238359922-989348752efb?w=1200&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=1200&h=800&fit=crop&q=80&auto=format",
     gradient: "from-blue-900/70 via-blue-700/40 to-transparent",
   },
   {
