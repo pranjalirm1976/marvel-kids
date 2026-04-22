@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ShoppingBag, Menu, X, Search, User, Heart, ChevronDown, Flame, Sparkles, Tag } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import useCartStore from "@/store/useCartStore";
 
 const navLinks = [
@@ -19,6 +20,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -41,24 +43,29 @@ export default function Navbar() {
   return (
     <>
       {/* ===== TOP OFFER BAR ===== */}
-      <div className="bg-[#ffd60a] text-[#0d0d0d] overflow-hidden relative">
-        <div className="flex whitespace-nowrap animate-marquee py-2">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex items-center gap-12 mx-6">
-              <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-wider uppercase">
-                <Flame size={12} /> FLAT 50% OFF — USE CODE MARVELS50
-              </span>
-              <span className="h-3 w-px bg-[#0d0d0d]/20" />
-              <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-wider uppercase">
-                <Tag size={11} /> FREE SHIPPING ABOVE ₹499
-              </span>
-              <span className="h-3 w-px bg-[#0d0d0d]/20" />
-              <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-wider uppercase">
-                <Sparkles size={11} /> NEW DROPS EVERY FRIDAY
-              </span>
-              <span className="h-3 w-px bg-[#0d0d0d]/20" />
-            </div>
-          ))}
+      <div className="bg-[#ffd60a] text-[#0d0d0d]">
+        <div className="mx-auto hidden h-9 max-w-7xl items-center justify-between px-4 lg:flex lg:px-8">
+          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
+            <Sparkles size={11} /> New Drops Every Friday
+          </span>
+          <span className="h-4 w-px bg-[#0d0d0d]/20" />
+          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
+            <Flame size={11} /> Flat 50% Off - Use Code Marvels50
+          </span>
+          <span className="h-4 w-px bg-[#0d0d0d]/20" />
+          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
+            <Tag size={11} /> Free Shipping Above ₹499
+          </span>
+          <span className="h-4 w-px bg-[#0d0d0d]/20" />
+          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
+            <Sparkles size={11} /> New Drops Every Friday
+          </span>
+        </div>
+
+        <div className="flex h-9 items-center px-4 lg:hidden">
+          <span className="mx-auto flex items-center gap-1.5 text-[10px] font-extrabold tracking-[0.08em] uppercase">
+            <Flame size={10} /> Flat 50% Off - Code Marvels50
+          </span>
         </div>
       </div>
 
@@ -98,7 +105,10 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setHoveredMenu(null)}>
-            {navLinks.map(({ label, href, submenu, hot }) => (
+            {navLinks.map(({ label, href, submenu, hot }) => {
+              const isActive = (pathname === "/" && label === "Girls") || pathname === href;
+
+              return (
               <div
                 key={label}
                 className="relative"
@@ -106,7 +116,11 @@ export default function Navbar() {
               >
                 <Link
                   href={href}
-                  className="relative flex items-center gap-1 px-4 py-6 text-[12px] font-bold uppercase tracking-[0.12em] text-gray-300 transition-colors hover:text-white group"
+                  className={`relative flex items-center gap-1 px-4 py-3 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors group ${
+                    isActive
+                      ? "border border-white/45 text-white"
+                      : "text-gray-300 hover:text-white"
+                  }`}
                 >
                   {label}
                   {hot && (
@@ -116,7 +130,6 @@ export default function Navbar() {
                     </span>
                   )}
                   {submenu && <ChevronDown size={11} className="text-gray-500 transition-transform group-hover:rotate-180" />}
-                  <span className="absolute bottom-4 left-1/2 h-[2px] w-0 bg-[#ffd60a] transition-all duration-300 group-hover:left-4 group-hover:w-[calc(100%-2rem)]" />
                 </Link>
 
                 {/* Mega menu dropdown */}
@@ -134,7 +147,8 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
           </nav>
 
           {/* Right Icons */}

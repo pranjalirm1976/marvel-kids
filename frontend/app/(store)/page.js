@@ -40,12 +40,13 @@ export default function Home() {
           <div className="flex items-center px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.24em] text-[#ffd60a]">
-                Girl&apos;s Collection
+                ✣
+                <span className="ml-2">Girl&apos;s Collection</span>
               </p>
               <h1 className="mt-4 text-6xl font-black uppercase leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-8xl">
                 Girls
               </h1>
-              <p className="mt-5 max-w-sm text-2xl font-semibold leading-snug text-gray-200">
+              <p className="mt-5 max-w-sm text-lg font-semibold leading-snug text-gray-200 sm:text-[35px] lg:text-[36px]">
                 Stylish &amp; adorable outfits for every little princess.
               </p>
               <p className="mt-5 text-base font-semibold text-slate-400">0 products available</p>
@@ -84,7 +85,7 @@ export default function Home() {
         <div className="mt-6 flex justify-center">
           <Link
             href="/shop"
-            className="bg-[#ffd60a] px-10 py-4 text-lg font-black uppercase tracking-wider text-[#0d0d0d] transition-colors hover:bg-[#f0ca00]"
+            className="bg-[#ffd60a] px-14 py-4 text-sm font-black uppercase tracking-[0.08em] text-[#0d0d0d] transition-colors hover:bg-[#f0ca00] sm:text-lg"
           >
             View All Products
           </Link>
