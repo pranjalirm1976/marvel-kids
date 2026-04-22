@@ -3,7 +3,7 @@ import Image from "next/image";
 import CategoryCollectionCard from "@/components/CategoryCollectionCard";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=1600&h=900&fit=crop&q=80&auto=format";
+  "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?w=1600&h=900&fit=crop&q=80&auto=format";
 
 const categoryCards = [
   {
