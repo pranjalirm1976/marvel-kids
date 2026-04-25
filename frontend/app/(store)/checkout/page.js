@@ -31,7 +31,8 @@ const MapLocationPicker = dynamic(
   { ssr: false }
 );
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/order`;
+// Use /api/orders/ endpoint (POST /) which is mounted at /api/orders in routes
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com"}/api/orders`;
 
 export default function CheckoutPage() {
   const router = useRouter();
