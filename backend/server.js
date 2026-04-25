@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const { createOrder, verifyPayment } = require("./controllers/orderController");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,6 +24,10 @@ app.get('/', (req, res) => res.status(200).send('Marvel Kids API is running.'));
 
 // Product routes
 app.use("/api/products", productRoutes);
+
+// Dedicated Razorpay handshake routes
+app.post("/api/order", createOrder);
+app.post("/api/order/verify", verifyPayment);
 
 // Order routes
 app.use("/api/orders", orderRoutes);

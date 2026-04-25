@@ -22,8 +22,8 @@ let _tokenExpiry = 0;
 async function getShiprocketToken() {
   if (_token && Date.now() < _tokenExpiry) return _token;
 
-  const email = process.env.SHIPROCKET_EMAIL;
-  const password = process.env.SHIPROCKET_PASSWORD;
+  const email = process.env.SHIPROCKET_EMAIL?.trim();
+  const password = process.env.SHIPROCKET_PASSWORD?.trim();
 
   if (!email || !password) {
     throw new Error(
@@ -31,10 +31,18 @@ async function getShiprocketToken() {
     );
   }
 
-  const { data } = await axios.post(`${SHIPROCKET_BASE}/auth/login`, {
-    email,
-    password,
-  });
+  const { data } = await axios.post(
+    `${SHIPROCKET_BASE}/auth/login`,
+    {
+      email,
+      password,
+    },
+    { timeout: 15000 }
+  );
+
+  if (!data?.token) {
+    throw new Error("Shiprocket login succeeded but token was not returned.");
+  }
 
   _token = data.token;
   _tokenExpiry = Date.now() + 23 * 60 * 60 * 1000; // 23 hours
@@ -46,22 +54,56 @@ async function getShiprocketToken() {
  * Expected format: "Street, City, State - Pincode"  (as built in orderController)
  */
 function parseAddress(addressStr = "") {
-  // Try to pull pincode from the end (6-digit Indian PIN)
-  const pincodeMatch = addressStr.match(/(\d{6})/);
-  const pincode = pincodeMatch ? pincodeMatch[1] : "000000";
+  const raw = String(addressStr || "").trim();
+  const pincode = (raw.match(/(\d{6})/) || [])[1] || "";
 
-  // Try to extract state — assumes "State - Pincode" at tail
-  const stateMatch = addressStr.match(/,\s*([^,\-]+)\s*-\s*\d{6}/);
-  const state = stateMatch ? stateMatch[1].trim() : "Maharashtra";
+  // Remove trailing "- 400001" or "400001" before splitting.
+  const withoutPincode = raw
+    .replace(/\s*-\s*\d{6}\s*$/, "")
+    .replace(/\s+\d{6}\s*$/, "")
+    .trim();
 
-  // City is second-to-last comma-separated chunk before state
-  const parts = addressStr.split(",").map((s) => s.trim());
-  const city = parts.length >= 2 ? parts[parts.length - 2].replace(/\s*-\s*\d{6}/, "").trim() : "Mumbai";
+  const parts = withoutPincode
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  // Everything before city is the street
-  const street = parts.slice(0, -2).join(", ") || addressStr;
+  let street = "";
+  let city = "";
+  let state = "";
+
+  if (parts.length >= 3) {
+    state = parts[parts.length - 1];
+    city = parts[parts.length - 2];
+    street = parts.slice(0, -2).join(", ");
+  } else if (parts.length === 2) {
+    city = parts[1];
+    street = parts[0];
+  } else if (parts.length === 1) {
+    street = parts[0];
+  }
 
   return { street, city, state, pincode };
+}
+
+function getTotalOrderWeightKg(items = []) {
+  const total = items.reduce((sum, item) => {
+    const qty = Number(item.quantity) > 0 ? Number(item.quantity) : 1;
+
+    // Prefer explicit per-item weight if present; otherwise fallback to 0.3kg per unit.
+    const inferredWeightKg =
+      Number(item.weightKg) > 0
+        ? Number(item.weightKg)
+        : Number(item.weightGrams) > 0
+        ? Number(item.weightGrams) / 1000
+        : Number(item.weight) > 0 && Number(item.weight) <= 10
+        ? Number(item.weight)
+        : 0.3;
+
+    return sum + qty * inferredWeightKg;
+  }, 0);
+
+  return Number(total.toFixed(2));
 }
 
 /**
@@ -76,6 +118,12 @@ async function createShipment(order) {
 
   const { street, city, state, pincode } = parseAddress(order.address);
 
+  if (!street || !city || !pincode) {
+    throw new Error(
+      `Invalid shipping address for order ${order._id}. Parsed values: street='${street}', city='${city}', pincode='${pincode}'`
+    );
+  }
+
   // Build line items for Shiprocket
   const srItems = order.items.map((item) => ({
     name: item.name,
@@ -84,8 +132,8 @@ async function createShipment(order) {
     selling_price: Math.round(item.price / 100), // convert paise → ₹
   }));
 
-  // Total weight in kg — default 0.3 kg per item if unknown
-  const totalWeight = (order.items.reduce((s, i) => s + i.quantity, 0) * 0.3).toFixed(2);
+  // Total shipment weight in kg.
+  const totalWeightKg = getTotalOrderWeightKg(order.items);
 
   const orderDate = new Date(order.createdAt).toISOString().split("T")[0];
 
@@ -101,7 +149,7 @@ async function createShipment(order) {
     billing_address_2: "",
     billing_city: city,
     billing_pincode: pincode,
-    billing_state: state,
+    billing_state: state || "NA",
     billing_country: "India",
     billing_email: order.email,
     billing_phone: order.phone || "9999999999",
@@ -112,7 +160,7 @@ async function createShipment(order) {
     length: 25,
     breadth: 20,
     height: 5,
-    weight: totalWeight,
+    weight: totalWeightKg,
   };
 
   const { data } = await axios.post(
