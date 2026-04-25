@@ -45,21 +45,13 @@ export default function Navbar() {
     <>
       {/* ===== TOP OFFER BAR ===== */}
       <div className="bg-[#ffd60a] text-[#0d0d0d]">
-        <div className="mx-auto hidden h-9 max-w-7xl items-center justify-between px-4 lg:flex lg:px-8">
-          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
-            <Sparkles size={11} /> New Drops Every Friday
-          </span>
-          <span className="h-4 w-px bg-[#0d0d0d]/20" />
+        <div className="mx-auto hidden h-9 max-w-7xl items-center justify-center gap-6 px-4 lg:flex lg:px-8">
           <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
             <Flame size={11} /> Flat 50% Off - Use Code Marvels50
           </span>
           <span className="h-4 w-px bg-[#0d0d0d]/20" />
           <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
             <Tag size={11} /> Free Shipping Above ₹499
-          </span>
-          <span className="h-4 w-px bg-[#0d0d0d]/20" />
-          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
-            <Sparkles size={11} /> New Drops Every Friday
           </span>
         </div>
 
