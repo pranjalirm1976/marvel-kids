@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag, Menu, X, Search, User, Heart, ChevronDown, Flame, Sparkles, Tag } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -88,18 +89,15 @@ export default function Navbar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative flex flex-col items-center leading-none">
-              <span className="text-2xl font-black tracking-tighter text-white sm:text-[1.75rem] lg:text-[2rem] group-hover:text-[#ffd60a] transition-colors duration-300">
-                MARVELS
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="h-[1.5px] w-4 bg-[#ffd60a]" />
-                <span className="text-[7px] font-bold uppercase tracking-[0.5em] text-[#ffd60a]/80 sm:text-[8px]">
-                  fashion
-                </span>
-                <span className="h-[1.5px] w-4 bg-[#ffd60a]" />
-              </div>
+          <Link href="/" className="flex items-center group">
+            <div className="relative h-[52px] w-[52px] transition-opacity group-hover:opacity-80">
+              <Image
+                src="/ms-logo.png"
+                alt="Marvels Fashion Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
           </Link>
 

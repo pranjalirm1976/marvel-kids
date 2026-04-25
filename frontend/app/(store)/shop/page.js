@@ -6,7 +6,7 @@ import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 import { SlidersHorizontal, X, ChevronDown, LayoutGrid, Grid3X3, Search, Sparkles } from "lucide-react";
 
-const categories = ["All", "Men", "Women", "Kids", "Accessories"];
+const categories = ["All", "Girls", "Boys", "Sports", "New Arrivals"];
 const sortOptions = [
   { label: "Newest First", value: "newest" },
   { label: "Price: Low → High", value: "price-asc" },
