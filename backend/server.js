@@ -12,6 +12,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ============ DEBUG: Routes are defined below ============
+// Razorpay order endpoint: /api/order (POST)
+// Razorpay verify endpoint: /api/order/verify (POST)
+// ========================================================
+
 // --------------- Middleware ---------------
 app.use(cors());
 app.use(express.json());
