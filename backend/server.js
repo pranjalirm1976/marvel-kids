@@ -27,6 +27,9 @@ app.get('/api/health', (req, res) => res.status(200).json({ status: 'success', m
 
 app.get('/', (req, res) => res.status(200).send('Marvel Kids API is running.'));
 
+// Test route to verify deployment 
+app.get('/api/test-2025', (req, res) => res.status(200).json({ deployed: true, timestamp: new Date().toISOString() }));
+
 // Product routes
 app.use("/api/products", productRoutes);
 
