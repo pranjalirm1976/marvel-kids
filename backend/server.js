@@ -31,7 +31,10 @@ app.get('/', (req, res) => res.status(200).send('Marvel Kids API is running.'));
 app.use("/api/products", productRoutes);
 
 // Dedicated Razorpay handshake routes
-app.post("/api/order", createOrder);
+app.post("/api/order", (req, res) => {
+  console.log("[TEST] /api/order route hit!");
+  createOrder(req, res);
+});
 app.post("/api/order/verify", verifyPayment);
 
 // Order routes
