@@ -89,8 +89,8 @@ export default function Navbar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
-            <div className="relative h-[52px] w-[52px] transition-opacity group-hover:opacity-80">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative h-[50px] w-[50px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/ms-logo.png"
                 alt="Marvels Fashion Logo"
@@ -98,6 +98,14 @@ export default function Navbar() {
                 className="object-contain"
                 priority
               />
+            </div>
+            <div className="hidden sm:flex flex-col leading-none">
+              <span className="text-[15px] font-black uppercase tracking-[0.12em] text-white group-hover:text-[#ffd60a] transition-colors duration-300">
+                Marvels
+              </span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.22em] text-[#ffd60a]/80 mt-0.5">
+                Kids &amp; Sports Wear
+              </span>
             </div>
           </Link>
 
