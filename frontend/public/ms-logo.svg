@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- White background circle -->
+  <circle cx="100" cy="100" r="100" fill="white"/>
+
+  <!-- Outer decorative circle ring — pink/teal gradient stroke -->
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#C97BAA"/>
+      <stop offset="100%" stop-color="#4ECDC4"/>
+    </linearGradient>
+    <linearGradient id="mGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#C97BAA"/>
+      <stop offset="100%" stop-color="#b06898"/>
+    </linearGradient>
+    <linearGradient id="sGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#3ab7b0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circle outline -->
+  <circle cx="100" cy="100" r="82" fill="none" stroke="url(#ringGrad)" stroke-width="2.2"/>
+
+  <!-- M letter (pink/mauve) -->
+  <text
+    x="52"
+    y="130"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="88"
+    font-style="italic"
+    font-weight="400"
+    fill="url(#mGrad)"
+    letter-spacing="-2"
+  >M</text>
+
+  <!-- S letter (teal) — overlapping, shifted right -->
+  <text
+    x="78"
+    y="128"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="76"
+    font-style="italic"
+    font-weight="400"
+    fill="url(#sGrad)"
+  >S</text>
+</svg>

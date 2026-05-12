@@ -16,7 +16,7 @@ const getDeterministicReviewCount = (id) => {
   return 50 + (hash % 500);
 };
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, priority = false }) {
   const router = useRouter();
   const addToCart = useCartStore((s) => s.addToCart);
   const [added, setAdded] = useState(false);
@@ -63,8 +63,11 @@ export default function ProductCard({ product }) {
               alt={product.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className={`object-cover img-zoom transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`object-cover img-zoom transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               onLoad={() => setImageLoaded(true)}
+              priority={priority}
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNlOGYwIi8+PC9zdmc+"
             />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-gray-300">
@@ -81,7 +84,10 @@ export default function ProductCard({ product }) {
               </span>
             )}
             {product.tags?.includes("new-arrival") && (
-              <span className="bg-[#0d0d0d] px-2 py-1 text-[10px] font-black uppercase tracking-wide text-[#ffd60a]">
+              <span
+                className="px-2 py-1 text-[10px] font-black uppercase tracking-wide text-white"
+                style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+              >
                 NEW
               </span>
             )}
@@ -106,11 +112,13 @@ export default function ProductCard({ product }) {
           <div className="absolute inset-x-0 bottom-0 flex translate-y-full gap-0 transition-transform duration-300 group-hover:translate-y-0">
             <button
               onClick={handleAdd}
-              className={`flex flex-1 items-center justify-center gap-2 py-3.5 text-[11px] font-black uppercase tracking-wider transition-all ${
-                added
-                  ? "bg-[#00c853] text-white"
-                  : "bg-[#ffd60a] text-[#0d0d0d] hover:bg-[#e6c009]"
+              className={`flex flex-1 items-center justify-center gap-2 py-3.5 text-[11px] font-black uppercase tracking-wider transition-all text-white ${
+                added ? "" : ""
               }`}
+              style={added
+                ? { background: "#00c853" }
+                : { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }
+              }
             >
               {added ? <Check size={14} strokeWidth={3} /> : <ShoppingBag size={14} />}
               {added ? "Added!" : "Add to Bag"}
@@ -118,7 +126,8 @@ export default function ProductCard({ product }) {
             <button
               type="button"
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(`/product/${product._id}`); }}
-              className="flex items-center justify-center bg-[#0d0d0d] px-4 text-white hover:bg-[#1a1a1a] transition-colors"
+              className="flex items-center justify-center px-4 text-white transition-colors"
+              style={{ background: "#2d2d3a" }}
             >
               <Eye size={16} />
             </button>
@@ -139,7 +148,7 @@ export default function ProductCard({ product }) {
         {/* ===== INFO ===== */}
         <div className="p-3 sm:p-4">
           {/* Brand tag */}
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#ffd60a]">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#ff2d87]">
             {product.brand || "MARVELS"}
           </p>
 

@@ -2,6 +2,8 @@ const crypto = require("crypto");
 const Razorpay = require("razorpay");
 const Order = require("../models/Order");
 const { createShipment } = require("../utils/shipping");
+const { sendOrderNotification } = require("../utils/mailer");
+const { sendOrderPendingMessage, sendOrderShippedMessage } = require("../utils/whatsapp");
 
 // Lazy Razorpay instance — only created when needed (avoids crash if keys missing)
 let _razorpay = null;
@@ -56,7 +58,25 @@ const createOrder = async (req, res) => {
         paymentStatus: "Pending",
       });
 
-      return res.status(201).json({ success: true, order });
+      // Respond to client immediately
+      res.status(201).json({ success: true, order });
+
+      // Trigger Shiprocket + email + WhatsApp asynchronously (non-blocking)
+      Promise.all([
+        createShipment(order).catch((err) =>
+          console.error("[Shiprocket] COD shipment failed for order", order._id, ":", err.message)
+        ),
+        sendOrderNotification(order).catch((err) =>
+          console.error("[Mailer] COD email failed for order", order._id, ":", err.message)
+        ),
+        sendOrderPendingMessage(order).catch((err) =>
+          console.error("[WhatsApp] COD message failed for order", order._id, ":", err.message)
+        )
+      ]).then(() => {
+        console.log(`[Order] All notifications sent for order ${order._id}`);
+      });
+
+      return; // response already sent
     }
 
     // --- Razorpay Flow ---
@@ -148,9 +168,19 @@ const verifyPayment = async (req, res) => {
       order,
     });
 
-    // Trigger Shiprocket shipment creation asynchronously (non-blocking)
-    createShipment(order).catch((err) => {
-      console.error("[Shiprocket] Failed to create shipment for order", order._id, ":", err.message);
+    // Trigger Shiprocket + email + WhatsApp asynchronously (non-blocking)
+    Promise.all([
+      createShipment(order).catch((err) =>
+        console.error("[Shiprocket] Failed to create shipment for order", order._id, ":", err.message)
+      ),
+      sendOrderNotification(order).catch((err) =>
+        console.error("[Mailer] Email failed for order", order._id, ":", err.message)
+      ),
+      sendOrderPendingMessage(order).catch((err) =>
+        console.error("[WhatsApp] Payment message failed for order", order._id, ":", err.message)
+      )
+    ]).then(() => {
+      console.log(`[Order] All post-payment notifications sent for order ${order._id}`);
     });
 
   } catch (err) {

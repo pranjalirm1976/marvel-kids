@@ -57,8 +57,36 @@ const orderSchema = new mongoose.Schema(
     },
     orderStatus: {
       type: String,
-      enum: ["Processing", "Shipped", "Delivered"],
-      default: "Processing",
+      enum: ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"],
+      default: "Pending",
+    },
+    shiprocketOrderId: {
+      type: String,
+      default: "",
+    },
+    trackingId: {
+      type: String,
+      default: "",
+    },
+    awbCode: {
+      type: String,
+      default: "",
+    },
+    whatsappStatus: {
+      type: String,
+      enum: ["Pending", "Sent", "Failed"],
+      default: "Pending",
+    },
+    whatsappMessages: [{
+      message: String,
+      status: String,
+      sentAt: Date,
+      messageType: {
+        type: String,
+        enum: ["order_pending", "order_confirmed", "order_shipped", "promotional"],
+        default: "order_pending"
+      }
+    }],
     },
     razorpayOrderId: { type: String },
     razorpayPaymentId: { type: String },

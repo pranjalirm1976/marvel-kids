@@ -1,54 +1,52 @@
 import Link from "next/link";
-import { Instagram, Twitter, Facebook, Youtube, Mail, Phone, MapPin, ArrowRight, Heart, RotateCcw, Shield, Headphones } from "lucide-react";
+import { Instagram, Twitter, Facebook, Youtube, Mail, MapPin, ArrowRight, Heart, RotateCcw, Shield, Headphones } from "lucide-react";
 
 /* ─── Column data ─── */
 const girlsLinks = [
-  { label: "Western Wear",   href: "/shop?category=Girls" },
-  { label: "Traditional",    href: "/shop?category=Girls" },
-  { label: "Jeans",          href: "/shop?category=Girls" },
-  { label: "Tops",           href: "/shop?category=Girls" },
-  { label: "Frocks",         href: "/shop?category=Girls" },
+  { label: "Western Wear",  href: "/shop?category=Girls" },
+  { label: "Traditional",   href: "/shop?category=Girls" },
+  { label: "Jeans",         href: "/shop?category=Girls" },
+  { label: "Tops",          href: "/shop?category=Girls" },
+  { label: "Frocks",        href: "/shop?category=Girls" },
 ];
-
 const boysLinks = [
-  { label: "Jeans",    href: "/shop?category=Boys" },
-  { label: "Tops",     href: "/shop?category=Boys" },
-  { label: "T-Shirts", href: "/shop?category=Boys" },
-  { label: "Shirts",   href: "/shop?category=Boys" },
+  { label: "Jeans",     href: "/shop?category=Boys" },
+  { label: "Tops",      href: "/shop?category=Boys" },
+  { label: "T-Shirts",  href: "/shop?category=Boys" },
+  { label: "Shirts",    href: "/shop?category=Boys" },
 ];
-
 const sportsLinks = [
   { label: "Women's T-Shirt", href: "/shop?category=Sports" },
   { label: "Gym Wear",        href: "/shop?category=Sports" },
   { label: "Track Suit",      href: "/shop?category=Sports" },
 ];
-
 const helpLinks = [
-  { label: "Track My Order",     href: "#" },
-  { label: "10-Day Returns",     href: "#" },
-  { label: "Shipping Policy",    href: "#" },
-  { label: "Size Guide",         href: "#" },
-  { label: "FAQs",               href: "#" },
-  { label: "Help & Support",     href: "#" },
+  { label: "Track My Order",  href: "#" },
+  { label: "10-Day Returns",  href: "#" },
+  { label: "Shipping Policy", href: "#" },
+  { label: "Size Guide",      href: "#" },
+  { label: "FAQs",            href: "#" },
+  { label: "Help & Support",  href: "#" },
 ];
-
 const companyLinks = [
-  { label: "About Us",          href: "#" },
-  { label: "Terms & Conditions",href: "#" },
-  { label: "Privacy Policy",    href: "#" },
-  { label: "Refund Policy",     href: "#" },
+  { label: "About Us",           href: "#" },
+  { label: "Terms & Conditions", href: "#" },
+  { label: "Privacy Policy",     href: "#" },
+  { label: "Refund Policy",      href: "#" },
 ];
-
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Twitter,   href: "#", label: "Twitter" },
-  { icon: Facebook,  href: "#", label: "Facebook" },
-  { icon: Youtube,   href: "#", label: "YouTube" },
+  { icon: Instagram, href: "#", label: "Instagram", color: "#ff2d87" },
+  { icon: Twitter,   href: "#", label: "Twitter",   color: "#3ab7e8" },
+  { icon: Facebook,  href: "#", label: "Facebook",  color: "#3ab7e8" },
+  { icon: Youtube,   href: "#", label: "YouTube",   color: "#ff2d87" },
 ];
 
-function ColHead({ title }) {
+function ColHead({ title, pink }) {
   return (
-    <h4 className="mb-4 text-[11px] font-extrabold uppercase tracking-widest text-white">
+    <h4
+      className="mb-4 text-[11px] font-extrabold uppercase tracking-widest"
+      style={{ color: pink ? "#ff2d87" : "#3ab7e8" }}
+    >
       {title}
     </h4>
   );
@@ -59,7 +57,7 @@ function LinkList({ links }) {
     <ul className="space-y-2">
       {links.map((l) => (
         <li key={l.label}>
-          <Link href={l.href} className="text-[11px] text-gray-500 hover:text-[#ffd60a] transition-colors">
+          <Link href={l.href} className="text-[11px] text-gray-400 hover:text-[#ff2d87] transition-colors">
             {l.label}
           </Link>
         </li>
@@ -70,20 +68,25 @@ function LinkList({ links }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0d0d0d] text-gray-500">
+    <footer
+      style={{
+        background: "linear-gradient(180deg, #fff8fb 0%, #f0fbff 40%, #fce8f3 100%)",
+        borderTop: "1.5px solid #fce8f3",
+      }}
+    >
 
       {/* ── Trust badges ── */}
-      <div className="border-b border-white/5">
+      <div style={{ borderBottom: "1px solid #fce8f3" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { icon: RotateCcw, text: "10-Day Easy Returns" },
-              { icon: Shield,    text: "100% Secure Payments" },
-              { icon: Mail,      text: "marvelskidswear@gmail.com" },
-              { icon: Headphones,text: "Help & Support" },
-            ].map(({ icon: Icon, text }) => (
+              { icon: RotateCcw,   text: "10-Day Easy Returns",       color: "#ff2d87" },
+              { icon: Shield,      text: "100% Secure Payments",       color: "#3ab7e8" },
+              { icon: Mail,        text: "marvelskidswear@gmail.com",  color: "#ff2d87" },
+              { icon: Headphones,  text: "Help & Support",             color: "#3ab7e8" },
+            ].map(({ icon: Icon, text, color }) => (
               <div key={text} className="flex items-center gap-2.5">
-                <Icon size={15} className="text-[#ffd60a] flex-shrink-0" />
+                <Icon size={15} className="flex-shrink-0" style={{ color }} />
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{text}</span>
               </div>
             ))}
@@ -92,22 +95,37 @@ export default function Footer() {
       </div>
 
       {/* ── Newsletter ── */}
-      <div className="border-b border-white/5">
+      <div style={{ borderBottom: "1px solid #fce8f3" }}>
         <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
             <div>
-              <h3 className="text-sm font-black uppercase tracking-wider text-white">
-                Join the <span className="text-[#ffd60a]">MARVELS</span> Club
+              <h3 className="text-sm font-black uppercase tracking-wider text-[#2d2d3a]">
+                Join the{" "}
+                <span
+                  style={{
+                    background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  MARVELS
+                </span>{" "}
+                Club
               </h3>
-              <p className="mt-1 text-xs text-gray-500">Get 10% off your first order + exclusive drops</p>
+              <p className="mt-1 text-xs text-gray-400">Get 10% off your first order + exclusive drops</p>
             </div>
-            <div className="flex w-full sm:w-auto">
+            <div className="flex w-full sm:w-auto rounded-full overflow-hidden shadow-sm"
+                 style={{ border: "1.5px solid #fce8f3" }}>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 sm:w-60 bg-white/5 border border-white/10 px-4 py-3 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-[#ffd60a] transition-colors"
+                className="flex-1 sm:w-60 bg-white px-5 py-3 text-xs text-[#2d2d3a] placeholder-gray-400 focus:outline-none"
               />
-              <button className="flex items-center gap-1.5 bg-[#ffd60a] px-5 py-3 text-[10px] font-black uppercase tracking-wider text-[#0d0d0d] hover:bg-[#ffce00] transition-colors">
+              <button
+                className="flex items-center gap-1.5 px-5 py-3 text-[10px] font-black uppercase tracking-wider text-white transition-all hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+              >
                 Subscribe <ArrowRight size={12} />
               </button>
             </div>
@@ -122,21 +140,34 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <Link href="/">
-              <h3 className="text-lg font-black uppercase tracking-tight text-white">MARVELS</h3>
-              <p className="text-[8px] font-bold uppercase tracking-[0.3em] text-[#ffd60a] -mt-0.5">
+              <h3
+                className="text-lg font-black uppercase tracking-tight"
+                style={{
+                  background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                MARVELS
+              </h3>
+              <p className="text-[8px] font-bold uppercase tracking-[0.3em] text-gray-400 -mt-0.5">
                 Kids &amp; Sports Wear
               </p>
             </Link>
-            <p className="mt-3 text-[11px] leading-5 text-gray-500 max-w-[200px]">
+            <p className="mt-3 text-[11px] leading-5 text-gray-400 max-w-[200px]">
               India&apos;s premier destination for premium Kids Wear and Junior Sports Gear.
             </p>
             <div className="mt-4 flex gap-2">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
+              {socialLinks.map(({ icon: Icon, href, label, color }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-8 w-8 items-center justify-center bg-white/5 text-gray-500 transition-all hover:bg-[#ffd60a] hover:text-[#0d0d0d]"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm border border-[#fce8f3] text-gray-400 transition-all hover:scale-110"
+                  style={{ "--hover-color": color }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = color)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "")}
                 >
                   <Icon size={13} />
                 </a>
@@ -146,7 +177,7 @@ export default function Footer() {
 
           {/* Girls */}
           <div>
-            <ColHead title="Girls" />
+            <ColHead title="Girls" pink />
             <LinkList links={girlsLinks} />
           </div>
 
@@ -158,34 +189,30 @@ export default function Footer() {
 
           {/* Sports Wear */}
           <div>
-            <ColHead title="Sports Wear" />
+            <ColHead title="Sports Wear" pink />
             <LinkList links={sportsLinks} />
           </div>
 
-          {/* Help & Support */}
+          {/* Help */}
           <div>
             <ColHead title="Help & Support" />
             <LinkList links={helpLinks} />
           </div>
 
-          {/* Company / T&C + Contact */}
+          {/* Company */}
           <div>
-            <ColHead title="Company" />
+            <ColHead title="Company" pink />
             <LinkList links={companyLinks} />
-
             <div className="mt-6 space-y-2.5">
-              <a
-                href="mailto:marvelskidswear@gmail.com"
-                className="flex items-start gap-2 group"
-              >
-                <Mail size={12} className="mt-0.5 text-[#ffd60a] flex-shrink-0" />
-                <span className="text-[10px] text-gray-500 group-hover:text-[#ffd60a] transition-colors break-all">
+              <a href="mailto:marvelskidswear@gmail.com" className="flex items-start gap-2 group">
+                <Mail size={12} className="mt-0.5 flex-shrink-0 text-[#ff2d87]" />
+                <span className="text-[10px] text-gray-400 group-hover:text-[#ff2d87] transition-colors break-all">
                   marvelskidswear@gmail.com
                 </span>
               </a>
               <div className="flex items-start gap-2">
-                <MapPin size={12} className="mt-0.5 text-[#ffd60a] flex-shrink-0" />
-                <span className="text-[10px] text-gray-500">Mumbai, Maharashtra, India</span>
+                <MapPin size={12} className="mt-0.5 flex-shrink-0 text-[#3ab7e8]" />
+                <span className="text-[10px] text-gray-400">Mumbai, Maharashtra, India</span>
               </div>
             </div>
           </div>
@@ -193,18 +220,28 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-white/5">
+      <div style={{ borderTop: "1px solid #fce8f3" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[10px] font-medium text-gray-600 flex items-center gap-1">
+          <p className="text-[10px] font-medium text-gray-400 flex items-center gap-1">
             © {new Date().getFullYear()} MARVELS Kids &amp; Sports Wear. Made with{" "}
-            <Heart size={10} className="text-red-500" fill="currentColor" /> in India
+            <Heart size={10} className="text-[#ff2d87] animate-heart-beat" fill="currentColor" /> in India
           </p>
-          <div className="flex items-center gap-4 text-[10px] font-medium uppercase tracking-wider text-gray-600">
+          <div className="flex items-center gap-4 text-[10px] font-medium uppercase tracking-wider text-gray-400">
             <span>100% Secure Payments</span>
-            <span className="h-3 w-px bg-gray-800" />
+            <span className="h-3 w-px bg-[#fce8f3]" />
             <span>Free Shipping ₹499+</span>
-            <span className="h-3 w-px bg-gray-800" />
-            <span className="text-[#ffd60a] font-bold">10-Day Returns</span>
+            <span className="h-3 w-px bg-[#fce8f3]" />
+            <span
+              className="font-bold"
+              style={{
+                background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              10-Day Returns
+            </span>
           </div>
         </div>
       </div>

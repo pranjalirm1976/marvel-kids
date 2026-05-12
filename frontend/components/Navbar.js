@@ -2,39 +2,40 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, Menu, X, Search, User, Heart, ChevronDown, Flame, Sparkles, Tag } from "lucide-react";
+import { ShoppingBag, Menu, X, Search, User, Heart, Sparkles, Tag, Star, Truck } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import useCartStore from "@/store/useCartStore";
 
 const navLinks = [
-  {
-    label: "Girls",
-    href: "/shop?category=Girls",
-  },
-  {
-    label: "Boys",
-    href: "/shop?category=Boys",
-  },
-  { label: "Sports Wear", href: "/shop?category=Sports" },
+  { label: "Girls",        href: "/shop?category=Girls" },
+  { label: "Boys",         href: "/shop?category=Boys" },
+  { label: "Sports Wear",  href: "/shop?category=Sports" },
   { label: "New Arrivals", href: "/shop", hot: true },
 ];
 
+/* Ticker messages */
+const tickerItems = [
+  { icon: Sparkles, text: "New Drops Every Friday" },
+  { icon: Tag,      text: "Flat 50% Off — Use Code MARVELS50" },
+  { icon: Truck,    text: "Free Shipping Above ₹499" },
+  { icon: Star,     text: "New Drops Every Friday" },
+];
+
 export default function Navbar() {
-  const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const pathname     = usePathname();
+  const [menuOpen, setMenuOpen]     = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [hoveredMenu, setHoveredMenu] = useState(null);
   const searchRef = useRef(null);
-  const items = useCartStore((s) => s.items);
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const items      = useCartStore((s) => s.items);
+  const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -43,22 +44,31 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ===== TOP OFFER BAR ===== */}
-      <div className="bg-[#ffd60a] text-[#0d0d0d]">
-        <div className="mx-auto hidden h-9 max-w-7xl items-center justify-center gap-6 px-4 lg:flex lg:px-8">
-          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
-            <Flame size={11} /> Flat 50% Off - Use Code Marvels50
-          </span>
-          <span className="h-4 w-px bg-[#0d0d0d]/20" />
-          <span className="flex items-center gap-1.5 text-[11px] font-extrabold tracking-[0.08em] uppercase">
-            <Tag size={11} /> Free Shipping Above ₹499
-          </span>
-        </div>
-
-        <div className="flex h-9 items-center px-4 lg:hidden">
-          <span className="mx-auto flex items-center gap-1.5 text-[10px] font-extrabold tracking-[0.08em] uppercase">
-            <Flame size={10} /> Flat 50% Off - Code Marvels50
-          </span>
+      {/* ===== TICKER BAR ===== */}
+      <div
+        style={{
+          background: "linear-gradient(90deg, #ff2d87, #3ab7e8, #ff2d87)",
+          backgroundSize: "200% 100%",
+          animation: "gradient-x 5s ease infinite",
+        }}
+        className="text-white overflow-hidden"
+      >
+        <div className="flex h-9 items-center overflow-hidden relative">
+          {/* Desktop — scrolling ticker */}
+          <div className="hidden lg:flex animate-ticker whitespace-nowrap select-none">
+            {[...tickerItems, ...tickerItems].map(({ icon: Icon, text }, i) => (
+              <span key={i} className="inline-flex items-center gap-2 px-8 text-[11px] font-bold tracking-[0.1em] uppercase">
+                <Icon size={11} />
+                {text}
+                <span className="mx-3 opacity-40">✦</span>
+              </span>
+            ))}
+          </div>
+          {/* Mobile — single centered */}
+          <div className="lg:hidden mx-auto flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase px-4">
+            <Tag size={10} />
+            Flat 50% Off — Code MARVELS50
+          </div>
         </div>
       </div>
 
@@ -66,95 +76,110 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[#0d0d0d]/[0.98] backdrop-blur-2xl shadow-2xl shadow-black/30"
-            : "bg-[#0d0d0d]"
+            ? "bg-white/[0.97] backdrop-blur-2xl shadow-lg shadow-pink-100/60"
+            : "bg-white"
         }`}
+        style={{ borderBottom: "1.5px solid #fce8f3" }}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[68px] lg:px-8">
+        <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 text-white lg:hidden hover:text-[#ffd60a] transition-colors active:scale-90"
+            className="p-2 text-[#2d2d3a] lg:hidden hover:text-[#ff2d87] transition-colors active:scale-90"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative h-[50px] w-[50px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src="/ms-logo.png"
-                alt="Marvels Fashion Logo"
-                fill
-                className="object-contain"
-                priority
-              />
+          <Link href="/" className="flex items-center gap-3 group">
+            {/* MS monogram logo — white background, pink/teal circle */}
+            <div
+              className="relative flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: "50%",
+                background: "#fff",
+                boxShadow: "0 2px 16px rgba(201,123,170,0.25)",
+                border: "2px solid transparent",
+                backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#C97BAA,#4ECDC4)",
+                backgroundOrigin: "border-box",
+                backgroundClip: "padding-box, border-box",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  background: "#fff",
+                }}
+              >
+                <Image
+                  src="/ms-logo.svg"
+                  alt="Marvels Fashion Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  sizes="56px"
+                />
+              </div>
             </div>
             <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-[15px] font-black uppercase tracking-[0.12em] text-white group-hover:text-[#ffd60a] transition-colors duration-300">
-                Marvels
+              <span
+                className="text-[19px] font-black uppercase tracking-[0.1em]"
+                style={{
+                  background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                MARVELS
               </span>
-              <span className="text-[8px] font-bold uppercase tracking-[0.22em] text-[#ffd60a]/80 mt-0.5">
-                Kids &amp; Sports Wear
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-gray-400 mt-0.5">
+                — FASHION —
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setHoveredMenu(null)}>
-            {navLinks.map(({ label, href, submenu, hot }) => {
-              const isActive = (pathname === "/" && label === "Girls") || pathname === href;
-
+          <nav className="hidden items-center gap-0 lg:flex">
+            {navLinks.map(({ label, href, hot }) => {
+              const isActive = pathname === href || (pathname === "/" && label === "Girls");
               return (
-              <div
-                key={label}
-                className="relative"
-                onMouseEnter={() => setHoveredMenu(submenu ? label : null)}
-              >
-                <Link
-                  href={href}
-                  className={`relative flex items-center gap-1 px-4 py-3 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors group ${
-                    isActive
-                      ? "border border-white/45 text-white"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {label}
-                  {hot && (
-                    <span className="absolute -top-0.5 right-1 flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff3d3d] opacity-50" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-[#ff3d3d]" />
-                    </span>
-                  )}
-                  {submenu && <ChevronDown size={11} className="text-gray-500 transition-transform group-hover:rotate-180" />}
-                </Link>
-
-                {/* Mega menu dropdown */}
-                {submenu && hoveredMenu === label && (
-                  <div className="absolute left-0 top-full w-48 bg-[#1a1a1a] border border-white/5 shadow-2xl shadow-black/40 animate-fade-in py-2">
-                    {submenu.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="block px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-gray-400 transition-colors hover:bg-white/5 hover:text-[#ffd60a]"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                <div key={label} className="relative">
+                  <Link
+                    href={href}
+                    className={`relative flex items-center gap-1.5 px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] transition-all duration-200 rounded-full mx-0.5 ${
+                      isActive
+                        ? "text-[#ff2d87] bg-[#fff0f7]"
+                        : "text-[#2d2d3a] hover:text-[#ff2d87] hover:bg-[#fff8fb]"
+                    }`}
+                  >
+                    {label}
+                    {hot && (
+                      <span className="absolute -top-0.5 right-2 flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3ab7e8] opacity-60" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3ab7e8]" />
+                      </span>
+                    )}
+                  </Link>
+                </div>
               );
             })}
           </nav>
 
           {/* Right Icons */}
           <div className="flex items-center gap-0.5 sm:gap-1">
-            {/* Search Toggle */}
+            {/* Search */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2.5 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5"
+              className="p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
               aria-label="Search"
             >
               <Search size={19} />
@@ -163,7 +188,7 @@ export default function Navbar() {
             {/* Wishlist */}
             <Link
               href="/shop"
-              className="hidden sm:flex p-2.5 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5"
+              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
               aria-label="Wishlist"
             >
               <Heart size={19} />
@@ -172,7 +197,7 @@ export default function Navbar() {
             {/* Admin */}
             <Link
               href="/admin"
-              className="hidden sm:flex p-2.5 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5"
+              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#3ab7e8] transition-all rounded-full hover:bg-[#f0fbff]"
               aria-label="Admin"
             >
               <User size={19} />
@@ -181,11 +206,11 @@ export default function Navbar() {
             {/* Cart */}
             <Link
               href="/cart"
-              className="relative p-2.5 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-white/5"
+              className="relative p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
             >
               <ShoppingBag size={19} />
               {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#ffd60a] text-[9px] font-black text-[#0d0d0d] animate-bounce-in ring-2 ring-[#0d0d0d]">
+                <span className="absolute -right-0.5 -top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#ff2d87] text-[9px] font-black text-white animate-bounce-in ring-2 ring-white">
                   {totalItems}
                 </span>
               )}
@@ -193,35 +218,37 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ===== SEARCH BAR ===== */}
+        {/* ===== SEARCH PANEL ===== */}
         {searchOpen && (
-          <div className="border-t border-white/5 bg-[#0d0d0d] animate-fade-in">
+          <div
+            className="border-t border-[#fce8f3] animate-fade-in"
+            style={{ background: "linear-gradient(135deg, #fff8fb, #f0fbff)" }}
+          >
             <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
               <div className="relative">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+                <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#ff2d87]" />
                 <input
                   ref={searchRef}
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for products, brands and more..."
-                  className="w-full bg-white/5 border border-white/10 py-3.5 pl-12 pr-4 text-sm text-white placeholder-gray-500 focus:border-[#ffd60a]/50 focus:outline-none focus:ring-1 focus:ring-[#ffd60a]/30 transition-all"
+                  placeholder="Search for kids wear, sports gear and more..."
+                  className="w-full bg-white border border-[#fce8f3] rounded-full py-3 pl-12 pr-10 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ff2d87] focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/20 transition-all shadow-sm"
                 />
                 <button
                   onClick={() => { setSearchOpen(false); setSearchQuery(""); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-white"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-[#ff2d87]"
                 >
-                  <X size={16} />
+                  <X size={15} />
                 </button>
               </div>
-              {/* Quick suggestions */}
               <div className="mt-3 flex flex-wrap gap-2">
-                {["T-Shirts", "Hoodies", "Joggers", "Oversized", "New Arrivals"].map((tag) => (
+                {["Girls Frocks", "Boys T-Shirts", "Sports Wear", "New Arrivals", "Party Wear"].map((tag) => (
                   <Link
                     key={tag}
-                    href={`/shop`}
+                    href="/shop"
                     onClick={() => setSearchOpen(false)}
-                    className="rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 hover:bg-[#ffd60a]/10 hover:text-[#ffd60a] hover:border-[#ffd60a]/30 transition-all"
+                    className="rounded-full border border-[#fce8f3] bg-white px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:bg-[#ff2d87] hover:text-white hover:border-[#ff2d87] transition-all"
                   >
                     {tag}
                   </Link>
@@ -233,60 +260,46 @@ export default function Navbar() {
 
         {/* ===== MOBILE MENU ===== */}
         {menuOpen && (
-          <nav className="border-t border-white/5 bg-[#0d0d0d] px-4 pb-6 lg:hidden animate-fade-in max-h-[70vh] overflow-y-auto">
+          <nav
+            className="border-t border-[#fce8f3] px-4 pb-6 lg:hidden animate-fade-in max-h-[70vh] overflow-y-auto"
+            style={{ background: "linear-gradient(180deg, #fff8fb, #f0fbff)" }}
+          >
             {/* Mobile Search */}
             <div className="relative mt-3 mb-4">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#ff2d87]" />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full bg-white/5 border border-white/10 py-3 pl-10 pr-4 text-sm text-white placeholder-gray-500 focus:border-[#ffd60a]/50 focus:outline-none"
+                className="w-full bg-white border border-[#fce8f3] rounded-full py-2.5 pl-10 pr-4 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ff2d87] focus:outline-none"
               />
             </div>
-
-            <div className="space-y-0.5">
-              {navLinks.map(({ label, href, submenu, hot }) => (
-                <div key={label}>
-                  <Link
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between rounded-lg px-4 py-3.5 text-sm font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-[#ffd60a] transition-colors"
-                  >
-                    <span className="flex items-center gap-2">
-                      {label}
-                      {hot && <span className="h-1.5 w-1.5 rounded-full bg-[#ff3d3d] animate-pulse" />}
-                    </span>
-                  </Link>
-                  {submenu && (
-                    <div className="ml-4 space-y-0.5 mb-1">
-                      {submenu.map((item) => (
-                        <Link
-                          key={item.label}
-                          href={item.href}
-                          onClick={() => setMenuOpen(false)}
-                          className="block rounded-lg px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:bg-white/5 hover:text-[#ffd60a] transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+            <div className="space-y-1">
+              {navLinks.map(({ label, href, hot }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold uppercase tracking-wider text-[#2d2d3a] hover:bg-white hover:text-[#ff2d87] transition-all"
+                >
+                  <span className="flex items-center gap-2">
+                    {label}
+                    {hot && <span className="h-1.5 w-1.5 rounded-full bg-[#3ab7e8] animate-pulse" />}
+                  </span>
+                </Link>
               ))}
             </div>
-
-            <div className="mt-4 border-t border-white/5 pt-4 space-y-1">
+            <div className="mt-4 border-t border-[#fce8f3] pt-4 space-y-1">
               <Link
                 href="/admin"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm font-semibold text-gray-400 hover:bg-white/5 hover:text-white"
+                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#3ab7e8] transition-all"
               >
                 <User size={16} /> Admin Panel
               </Link>
               <Link
                 href="/cart"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm font-semibold text-gray-400 hover:bg-white/5 hover:text-white"
+                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#ff2d87] transition-all"
               >
                 <ShoppingBag size={16} /> My Bag {totalItems > 0 && `(${totalItems})`}
               </Link>

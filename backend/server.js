@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const whatsappRoutes = require("./routes/whatsappRoutes");
 const { createOrder, verifyPayment } = require("./controllers/orderController");
 
 // Load environment variables from .env file
@@ -42,6 +44,12 @@ app.post("/api/order/verify", verifyPayment);
 
 // Order routes
 app.use("/api/orders", orderRoutes);
+
+// Admin routes
+app.use("/api/admin", adminRoutes);
+
+// WhatsApp webhook routes
+app.use("/api/whatsapp", whatsappRoutes);
 
 // --------------- Error Handler ---------------
 app.use((err, _req, res, _next) => {

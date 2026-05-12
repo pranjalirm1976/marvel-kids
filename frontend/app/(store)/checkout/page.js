@@ -138,6 +138,8 @@ export default function CheckoutPage() {
     const errors = {};
     if (!formData.name.trim())    errors.name    = "Full name is required";
     if (!formData.email.trim())   errors.email   = "Email is required";
+    if (!formData.phone.trim())   errors.phone   = "Phone number is required for order updates";
+    if (formData.phone.trim() && !/^[6-9]\d{9}$/.test(formData.phone.replace(/\s/g, ''))) errors.phone = "Enter a valid 10-digit Indian mobile number";
     if (!formData.address.trim()) errors.address = "Delivery address is required";
     if (!formData.pincode.trim()) errors.pincode = "Pincode is required";
     setFieldErrors(errors);
@@ -312,7 +314,7 @@ export default function CheckoutPage() {
   const isLoading = processing || detectingLocation;
 
   const inputClass =
-    "w-full border-2 border-gray-200 px-4 py-3.5 text-sm text-[#0d0d0d] placeholder-gray-300 focus:border-[#0d0d0d] focus:outline-none transition-colors font-medium";
+    "w-full border-2 border-[#fce8f3] rounded-xl px-4 py-3.5 text-sm text-[#2d2d3a] placeholder-gray-300 focus:border-[#ff2d87] focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/10 transition-colors font-medium bg-white";
 
   return (
     <>
@@ -333,13 +335,13 @@ export default function CheckoutPage() {
 
       {/* ── Full-Screen Loading Overlay ── */}
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0d0d0d]/80 backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-4">
-            <span className="h-12 w-12 animate-spin rounded-full border-4 border-[#ffd60a] border-t-transparent" />
-            <p className="text-sm font-bold uppercase tracking-widest text-white">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center backdrop-blur-sm" style={{ background: "rgba(255,45,135,0.12)" }}>
+          <div className="flex flex-col items-center gap-4 bg-white rounded-3xl px-10 py-8 shadow-2xl" style={{ border: "1.5px solid #fce8f3" }}>
+            <span className="h-12 w-12 animate-spin rounded-full border-4 border-t-transparent" style={{ borderColor: "#ff2d87", borderTopColor: "transparent" }} />
+            <p className="text-sm font-bold uppercase tracking-widest" style={{ color: "#2d2d3a" }}>
               {detectingLocation ? "Detecting your location..." : "Processing payment..."}
             </p>
-            <p className="text-[10px] text-gray-400 uppercase tracking-wider">
+            <p className="text-[10px] uppercase tracking-wider" style={{ color: "#8892a4" }}>
               {detectingLocation
                 ? "Please allow location access if prompted"
                 : "Do not close this window"}
@@ -348,60 +350,58 @@ export default function CheckoutPage() {
         </div>
       )}
 
-      <div className="bg-[#fafafa] min-h-screen">
+      <div style={{ background: "linear-gradient(160deg, #fff8fb 0%, #f0fbff 100%)" }} className="min-h-screen">
         {/* Header */}
-        <div className="bg-[#0d0d0d]">
+        <div style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)", borderBottom: "1.5px solid #fce8f3" }}>
           <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/cart" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/cart" className="text-white/70 hover:text-white transition-colors">
                 <ChevronLeft size={20} />
               </Link>
               <h1 className="text-xl font-black uppercase tracking-tight text-white sm:text-2xl">
                 Checkout
               </h1>
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-white/80">
               <Lock size={12} /> Secure Checkout
             </div>
           </div>
         </div>
 
         {/* Progress Steps */}
-        <div className="bg-white border-b border-gray-100">
+        <div className="bg-white" style={{ borderBottom: "1px solid #fce8f3" }}>
           <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={() => setStep(1)}
                 className={`flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                  step >= 1 ? "text-[#0d0d0d]" : "text-gray-300"
+                  step >= 1 ? "text-[#ff2d87]" : "text-gray-300"
                 }`}
               >
                 <span
-                  className={`flex h-6 w-6 items-center justify-center text-[10px] font-black ${
-                    step > 1
-                      ? "bg-[#00c853] text-white"
-                      : step === 1
-                      ? "bg-[#0d0d0d] text-white"
-                      : "bg-gray-200 text-gray-400"
-                  }`}
+                  className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-black text-white`}
+                  style={{
+                    background: step > 1 ? "#00c853" : step === 1 ? "linear-gradient(135deg, #ff2d87, #3ab7e8)" : "#e5e7eb",
+                    color: step > 1 || step === 1 ? "#fff" : "#9ca3af",
+                  }}
                 >
                   {step > 1 ? <CheckCircle size={12} /> : "1"}
                 </span>
                 Address
               </button>
-              <div className={`h-px w-12 ${step >= 2 ? "bg-[#0d0d0d]" : "bg-gray-200"}`} />
+              <div className="h-px w-12" style={{ background: step >= 2 ? "linear-gradient(90deg,#ff2d87,#3ab7e8)" : "#e5e7eb" }} />
               <button
                 onClick={() => validateAddress() && setStep(2)}
                 className={`flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                  step >= 2 ? "text-[#0d0d0d]" : "text-gray-300"
+                  step >= 2 ? "text-[#ff2d87]" : "text-gray-300"
                 }`}
               >
                 <span
-                  className={`flex h-6 w-6 items-center justify-center text-[10px] font-black ${
-                    step === 2
-                      ? "bg-[#0d0d0d] text-white"
-                      : "bg-gray-200 text-gray-400"
-                  }`}
+                  className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-black"
+                  style={{
+                    background: step === 2 ? "linear-gradient(135deg, #ff2d87, #3ab7e8)" : "#e5e7eb",
+                    color: step === 2 ? "#fff" : "#9ca3af",
+                  }}
                 >
                   2
                 </span>
