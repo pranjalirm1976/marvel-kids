@@ -40,7 +40,7 @@ export default function AdminDashboard() {
       value: loading ? "Loading..." : `₹${(stats.total.totalRevenue / 100).toLocaleString('en-IN')}`,
       change: `${stats.today.todayRevenue > 0 ? `+₹${(stats.today.todayRevenue / 100).toFixed(0)} today` : 'No sales today'}`,
       icon: IndianRupee,
-      color: "bg-gradient-to-r from-[#ff2d87] to-[#ff6aab]",
+      color: "bg-gradient-to-r from-[#ec4899] to-[#f472b6]",
       textColor: "text-white",
     },
     {
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
       value: loading ? "Loading..." : stats.total.totalOrders.toString(),
       change: `${stats.today.todayOrders > 0 ? `+${stats.today.todayOrders} today` : 'No orders today'}`,
       icon: ShoppingCart,
-      color: "bg-gradient-to-r from-[#3ab7e8] to-[#76d0f5]",
+      color: "bg-gradient-to-r from-[#67e8f9] to-[#a5f3fc]",
       textColor: "text-white",
     },
     {
@@ -70,8 +70,8 @@ export default function AdminDashboard() {
   ];
 
   const quickActions = [
-    { label: "Manage Orders", href: "/admin/orders", icon: ShoppingCart, color: "bg-[#ff2d87]" },
-    { label: "Add Product", href: "/admin/products", icon: Package, color: "bg-[#3ab7e8]" },
+    { label: "Manage Orders", href: "/admin/orders", icon: ShoppingCart, color: "bg-[#ec4899]" },
+    { label: "Add Product", href: "/admin/products", icon: Package, color: "bg-[#67e8f9]" },
     { label: "Send WhatsApp", href: "/admin/whatsapp", icon: MessageCircle, color: "bg-[#25d366]" },
     { label: "Track Shipments", href: "/admin/tracking", icon: Truck, color: "bg-[#ff9800]" },
     { label: "Visit Store", href: "/", icon: Eye, color: "bg-[#9c27b0]" },
@@ -80,7 +80,7 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#ff2d87] to-[#3ab7e8] p-8 rounded-2xl text-white">
+      <div className="bg-gradient-to-r from-[#ec4899] to-[#67e8f9] p-8 rounded-2xl text-white">
         <h1 className="text-3xl font-black uppercase tracking-tight">
           Admin Dashboard
         </h1>
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-black uppercase tracking-wide text-gray-900">Recent Orders</h3>
-            <Link href="/admin/orders" className="text-[#ff2d87] hover:text-[#ff6aab] text-sm font-bold">
+            <Link href="/admin/orders" className="text-[#ec4899] hover:text-[#f472b6] text-sm font-bold">
               View All →
             </Link>
           </div>
@@ -168,7 +168,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-black uppercase tracking-wide text-gray-900">Top Products</h3>
-            <Link href="/admin/products" className="text-[#3ab7e8] hover:text-[#76d0f5] text-sm font-bold">
+            <Link href="/admin/products" className="text-[#67e8f9] hover:text-[#a5f3fc] text-sm font-bold">
               Manage →
             </Link>
           </div>
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
               stats.topProducts.slice(0, 5).map((product, index) => (
                 <div key={product._id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-[#ff2d87] to-[#3ab7e8] rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-8 h-8 bg-gradient-to-r from-[#ec4899] to-[#67e8f9] rounded-full flex items-center justify-center text-white font-bold text-sm">
                       {index + 1}
                     </div>
                     <div>

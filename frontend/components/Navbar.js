@@ -47,7 +47,7 @@ export default function Navbar() {
       {/* ===== TICKER BAR ===== */}
       <div
         style={{
-          background: "linear-gradient(90deg, #ff2d87, #3ab7e8, #ff2d87)",
+          background: "linear-gradient(90deg, #ec4899, #67e8f9, #ec4899)",
           backgroundSize: "200% 100%",
           animation: "gradient-x 5s ease infinite",
         }}
@@ -76,17 +76,17 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/[0.97] backdrop-blur-2xl shadow-lg shadow-pink-100/60"
+            ? "bg-white/[0.97] backdrop-blur-2xl shadow-lg shadow-pink-200/60"
             : "bg-white"
         }`}
-        style={{ borderBottom: "1.5px solid #fce8f3" }}
+        style={{ borderBottom: "1.5px solid #fbcfe8" }}
       >
         <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 text-[#2d2d3a] lg:hidden hover:text-[#ff2d87] transition-colors active:scale-90"
+            className="p-2 text-[#2d2d3a] lg:hidden hover:text-[#ec4899] transition-colors active:scale-90"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -102,9 +102,9 @@ export default function Navbar() {
                 height: 56,
                 borderRadius: "50%",
                 background: "#fff",
-                boxShadow: "0 2px 16px rgba(201,123,170,0.25)",
+                boxShadow: "0 2px 16px rgba(236,72,153,0.25)",
                 border: "2px solid transparent",
-                backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#C97BAA,#4ECDC4)",
+                backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#ec4899,#67e8f9)",
                 backgroundOrigin: "border-box",
                 backgroundClip: "padding-box, border-box",
               }}
@@ -120,8 +120,8 @@ export default function Navbar() {
                 }}
               >
                 <Image
-                  src="/ms-logo.svg"
-                  alt="Marvels Fashion Logo"
+                  src="/marvels-logo.svg"
+                  alt="Marvels Logo"
                   fill
                   className="object-contain"
                   priority
@@ -133,7 +133,7 @@ export default function Navbar() {
               <span
                 className="text-[19px] font-black uppercase tracking-[0.1em]"
                 style={{
-                  background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                  background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -142,7 +142,7 @@ export default function Navbar() {
                 MARVELS
               </span>
               <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-gray-400 mt-0.5">
-                — FASHION —
+                KIDS & SPORTS
               </span>
             </div>
           </Link>
@@ -157,15 +157,15 @@ export default function Navbar() {
                     href={href}
                     className={`relative flex items-center gap-1.5 px-5 py-3 text-[12px] font-bold uppercase tracking-[0.12em] transition-all duration-200 rounded-full mx-0.5 ${
                       isActive
-                        ? "text-[#ff2d87] bg-[#fff0f7]"
-                        : "text-[#2d2d3a] hover:text-[#ff2d87] hover:bg-[#fff8fb]"
+                        ? "text-[#ec4899] bg-[#fce7f3]"
+                        : "text-[#2d2d3a] hover:text-[#ec4899] hover:bg-[#fce7f3]"
                     }`}
                   >
                     {label}
                     {hot && (
                       <span className="absolute -top-0.5 right-2 flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3ab7e8] opacity-60" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3ab7e8]" />
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#67e8f9] opacity-60" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#67e8f9]" />
                       </span>
                     )}
                   </Link>
@@ -179,7 +179,7 @@ export default function Navbar() {
             {/* Search */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
+              className="p-2.5 text-gray-500 hover:text-[#ec4899] transition-all rounded-full hover:bg-[#fce7f3]"
               aria-label="Search"
             >
               <Search size={19} />
@@ -188,7 +188,7 @@ export default function Navbar() {
             {/* Wishlist */}
             <Link
               href="/shop"
-              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
+              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#ec4899] transition-all rounded-full hover:bg-[#fce7f3]"
               aria-label="Wishlist"
             >
               <Heart size={19} />
@@ -197,7 +197,7 @@ export default function Navbar() {
             {/* Admin */}
             <Link
               href="/admin"
-              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#3ab7e8] transition-all rounded-full hover:bg-[#f0fbff]"
+              className="hidden sm:flex p-2.5 text-gray-500 hover:text-[#67e8f9] transition-all rounded-full hover:bg-[#ecfdf5]"
               aria-label="Admin"
             >
               <User size={19} />
@@ -206,11 +206,11 @@ export default function Navbar() {
             {/* Cart */}
             <Link
               href="/cart"
-              className="relative p-2.5 text-gray-500 hover:text-[#ff2d87] transition-all rounded-full hover:bg-[#fff0f7]"
+              className="relative p-2.5 text-gray-500 hover:text-[#ec4899] transition-all rounded-full hover:bg-[#fce7f3]"
             >
               <ShoppingBag size={19} />
               {totalItems > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#ff2d87] text-[9px] font-black text-white animate-bounce-in ring-2 ring-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-[#ec4899] text-[9px] font-black text-white animate-bounce-in ring-2 ring-white">
                   {totalItems}
                 </span>
               )}
@@ -221,23 +221,23 @@ export default function Navbar() {
         {/* ===== SEARCH PANEL ===== */}
         {searchOpen && (
           <div
-            className="border-t border-[#fce8f3] animate-fade-in"
-            style={{ background: "linear-gradient(135deg, #fff8fb, #f0fbff)" }}
+            className="border-t border-[#fbcfe8] animate-fade-in"
+            style={{ background: "linear-gradient(135deg, #fce7f3, #ecfdf5)" }}
           >
             <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
               <div className="relative">
-                <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#ff2d87]" />
+                <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#ec4899]" />
                 <input
                   ref={searchRef}
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for kids wear, sports gear and more..."
-                  className="w-full bg-white border border-[#fce8f3] rounded-full py-3 pl-12 pr-10 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ff2d87] focus:outline-none focus:ring-2 focus:ring-[#ff2d87]/20 transition-all shadow-sm"
+                  className="w-full bg-white border border-[#fbcfe8] rounded-full py-3 pl-12 pr-10 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ec4899] focus:outline-none focus:ring-2 focus:ring-[#ec4899]/20 transition-all shadow-sm"
                 />
                 <button
                   onClick={() => { setSearchOpen(false); setSearchQuery(""); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-[#ff2d87]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-[#ec4899]"
                 >
                   <X size={15} />
                 </button>
@@ -248,7 +248,7 @@ export default function Navbar() {
                     key={tag}
                     href="/shop"
                     onClick={() => setSearchOpen(false)}
-                    className="rounded-full border border-[#fce8f3] bg-white px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:bg-[#ff2d87] hover:text-white hover:border-[#ff2d87] transition-all"
+                    className="rounded-full border border-[#fbcfe8] bg-white px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:bg-[#ec4899] hover:text-white hover:border-[#ec4899] transition-all"
                   >
                     {tag}
                   </Link>
@@ -261,16 +261,16 @@ export default function Navbar() {
         {/* ===== MOBILE MENU ===== */}
         {menuOpen && (
           <nav
-            className="border-t border-[#fce8f3] px-4 pb-6 lg:hidden animate-fade-in max-h-[70vh] overflow-y-auto"
-            style={{ background: "linear-gradient(180deg, #fff8fb, #f0fbff)" }}
+            className="border-t border-[#fbcfe8] px-4 pb-6 lg:hidden animate-fade-in max-h-[70vh] overflow-y-auto"
+            style={{ background: "linear-gradient(180deg, #fce7f3, #ecfdf5)" }}
           >
             {/* Mobile Search */}
             <div className="relative mt-3 mb-4">
-              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#ff2d87]" />
+              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#ec4899]" />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full bg-white border border-[#fce8f3] rounded-full py-2.5 pl-10 pr-4 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ff2d87] focus:outline-none"
+                className="w-full bg-white border border-[#fbcfe8] rounded-full py-2.5 pl-10 pr-4 text-sm text-[#2d2d3a] placeholder-gray-400 focus:border-[#ec4899] focus:outline-none"
               />
             </div>
             <div className="space-y-1">
@@ -279,27 +279,27 @@ export default function Navbar() {
                   key={label}
                   href={href}
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold uppercase tracking-wider text-[#2d2d3a] hover:bg-white hover:text-[#ff2d87] transition-all"
+                  className="flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-bold uppercase tracking-wider text-[#2d2d3a] hover:bg-white hover:text-[#ec4899] transition-all"
                 >
                   <span className="flex items-center gap-2">
                     {label}
-                    {hot && <span className="h-1.5 w-1.5 rounded-full bg-[#3ab7e8] animate-pulse" />}
+                    {hot && <span className="h-1.5 w-1.5 rounded-full bg-[#67e8f9] animate-pulse" />}
                   </span>
                 </Link>
               ))}
             </div>
-            <div className="mt-4 border-t border-[#fce8f3] pt-4 space-y-1">
+            <div className="mt-4 border-t border-[#fbcfe8] pt-4 space-y-1">
               <Link
                 href="/admin"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#3ab7e8] transition-all"
+                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#67e8f9] transition-all"
               >
                 <User size={16} /> Admin Panel
               </Link>
               <Link
                 href="/cart"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#ff2d87] transition-all"
+                className="flex items-center gap-2.5 rounded-2xl px-4 py-3 text-sm font-semibold text-gray-500 hover:bg-white hover:text-[#ec4899] transition-all"
               >
                 <ShoppingBag size={16} /> My Bag {totalItems > 0 && `(${totalItems})`}
               </Link>

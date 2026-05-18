@@ -3,22 +3,22 @@
 /* ===== MARVELS Brand Design System — Enhanced Pink & Blue Premium ===== */
 :root {
   /* Primary palette - Enhanced */
-  --pink:        #ff2d87;
-  --pink-light:  #ff6aab;
-  --pink-pale:   #fce8f3;
-  --pink-soft:   #fff0f7;
-  --pink-dark:   #e91e63;
+  --pink:        #ec4899;
+  --pink-light:  #f472b6;
+  --pink-pale:   #fbcfe8;
+  --pink-soft:   #fce7f3;
+  --pink-dark:   #be185d;
 
-  --blue:        #3ab7e8;
-  --blue-light:  #76d0f5;
-  --blue-pale:   #e3f6fd;
-  --blue-soft:   #f0fbff;
-  --blue-dark:   #2196f3;
+  --blue:        #67e8f9;
+  --blue-light:  #a5f3fc;
+  --blue-pale:   #cffafe;
+  --blue-soft:   #ecfdf5;
+  --blue-dark:   #0891b2;
 
   /* Gradient combinations */
-  --gradient-primary: linear-gradient(135deg, #ff2d87 0%, #3ab7e8 100%);
-  --gradient-secondary: linear-gradient(135deg, #ff6aab 0%, #76d0f5 100%);
-  --gradient-accent: linear-gradient(135deg, #e91e63 0%, #2196f3 100%);
+  --gradient-primary: linear-gradient(135deg, #ec4899 0%, #67e8f9 100%);
+  --gradient-secondary: linear-gradient(135deg, #f472b6 0%, #a5f3fc 100%);
+  --gradient-accent: linear-gradient(135deg, #be185d 0%, #0891b2 100%);
 
   /* Neutral - Enhanced */
   --white:       #ffffff;
@@ -658,7 +658,7 @@ body {
 
 /* ===== Skeleton ===== */
 .skeleton {
-  background: linear-gradient(90deg, #fce8f3 25%, #fdd6ea 50%, #fce8f3 75%);
+  background: linear-gradient(90deg, #fbcfe8 25%, #f8bbd0 50%, #fbcfe8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

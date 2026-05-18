@@ -63,26 +63,26 @@ function ShopContent({ initialProducts }) {
     : "grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4";
 
   return (
-    <div style={{ background: "linear-gradient(160deg, #fff8fb 0%, #f0fbff 100%)" }} className="min-h-screen">
+    <div style={{ background: "linear-gradient(160deg, #fce7f3 0%, #ecfdf5 100%)" }} className="min-h-screen">
 
       {/* ===== PAGE HEADER ===== */}
       <div
         className="relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, #fff8fb 0%, #f0fbff 60%, #fff8fb 100%)",
-          borderBottom: "1.5px solid #fce8f3",
+          background: "linear-gradient(135deg, #fce7f3 0%, #ecfdf5 60%, #fce7f3 100%)",
+          borderBottom: "1.5px solid #fbcfe8",
         }}
       >
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div className="absolute -top-10 -left-10 h-48 w-48 rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #ff2d87, transparent 70%)" }} />
+            style={{ background: "radial-gradient(circle, #ec4899, transparent 70%)" }} />
           <div className="absolute -top-8 right-0 h-40 w-40 rounded-full opacity-20"
-            style={{ background: "radial-gradient(circle, #3ab7e8, transparent 70%)" }} />
+            style={{ background: "radial-gradient(circle, #67e8f9, transparent 70%)" }} />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles size={14} style={{ color: "#ff2d87" }} />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: "#ff2d87" }}>
+            <Sparkles size={14} style={{ color: "#ec4899" }} />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: "#ec4899" }}>
               {activeCategory === "All" ? "All Collections" : `${activeCategory}'s Collection`}
             </span>
           </div>
@@ -108,9 +108,9 @@ function ShopContent({ initialProducts }) {
                 className={`px-5 py-2 text-[11px] font-extrabold uppercase tracking-wider transition-all whitespace-nowrap rounded-full ${
                   activeCategory === cat
                     ? "text-white shadow-md"
-                    : "bg-white text-gray-500 hover:bg-[#fff0f7] hover:text-[#ff2d87] border border-[#fce8f3]"
+                    : "bg-white text-gray-500 hover:bg-[#fce7f3] hover:text-[#ec4899] border border-[#fbcfe8]"
                 }`}
-                style={activeCategory === cat ? { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" } : {}}
+                style={activeCategory === cat ? { background: "linear-gradient(135deg, #ec4899, #67e8f9)" } : {}}
               >
                 {cat}
               </button>
@@ -120,7 +120,7 @@ function ShopContent({ initialProducts }) {
           {/* Mobile filter button */}
           <button
             onClick={() => setMobileFiltersOpen(true)}
-            className="flex sm:hidden items-center gap-2 bg-white border border-[#fce8f3] px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full"
+            className="flex sm:hidden items-center gap-2 bg-white border border-[#fbcfe8] px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-full"
             style={{ color: "#2d2d3a" }}
           >
             <SlidersHorizontal size={14} /> Filter &amp; Sort
@@ -129,14 +129,14 @@ function ShopContent({ initialProducts }) {
           {/* Right controls */}
           <div className="flex items-center gap-3">
             {/* Grid toggle */}
-            <div className="hidden lg:flex items-center gap-0 bg-white border border-[#fce8f3] rounded-full overflow-hidden shadow-sm">
+            <div className="hidden lg:flex items-center gap-0 bg-white border border-[#fbcfe8] rounded-full overflow-hidden shadow-sm">
               {[4, 5].map((cols) => (
                 <button
                   key={cols}
                   onClick={() => setGridCols(cols)}
                   className="p-2.5 transition-colors"
                   style={gridCols === cols
-                    ? { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)", color: "#fff" }
+                    ? { background: "linear-gradient(135deg, #ec4899, #67e8f9)", color: "#fff" }
                     : { color: "#8892a4" }}
                 >
                   {cols === 4 ? <LayoutGrid size={14} /> : <Grid3X3 size={14} />}
@@ -149,7 +149,7 @@ function ShopContent({ initialProducts }) {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white border border-[#fce8f3] rounded-full py-2.5 pl-4 pr-10 text-[11px] font-bold uppercase tracking-wider focus:border-[#ff2d87] focus:outline-none cursor-pointer shadow-sm"
+                className="appearance-none bg-white border border-[#fbcfe8] rounded-full py-2.5 pl-4 pr-10 text-[11px] font-bold uppercase tracking-wider focus:border-[#ec4899] focus:outline-none cursor-pointer shadow-sm"
                 style={{ color: "#2d2d3a" }}
               >
                 {sortOptions.map((opt) => (
@@ -168,7 +168,7 @@ function ShopContent({ initialProducts }) {
             <button
               onClick={() => setActiveCategory("All")}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white rounded-full"
-              style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+              style={{ background: "linear-gradient(135deg, #ec4899, #67e8f9)" }}
             >
               {activeCategory} <X size={10} />
             </button>
@@ -189,8 +189,8 @@ function ShopContent({ initialProducts }) {
                 <h3 className="text-lg font-black uppercase tracking-tight" style={{ color: "#2d2d3a" }}>
                   Filter &amp; Sort
                 </h3>
-                <button onClick={() => setMobileFiltersOpen(false)} className="p-2 rounded-full hover:bg-[#fff0f7]">
-                  <X size={20} style={{ color: "#ff2d87" }} />
+                <button onClick={() => setMobileFiltersOpen(false)} className="p-2 rounded-full hover:bg-[#fce7f3]">
+                  <X size={20} style={{ color: "#ec4899" }} />
                 </button>
               </div>
               <div className="mb-6">
@@ -201,11 +201,11 @@ function ShopContent({ initialProducts }) {
                       key={cat}
                       onClick={() => { setActiveCategory(cat); setMobileFiltersOpen(false); }}
                       className={`w-full text-left px-4 py-3.5 text-sm font-bold uppercase tracking-wider transition-all rounded-xl ${
-                        activeCategory === cat ? "text-white" : "text-gray-700 hover:bg-[#fff0f7]"
+                        activeCategory === cat ? "text-white" : "text-gray-700 hover:bg-[#fce7f3]"
                       }`}
                       style={activeCategory === cat
-                        ? { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }
-                        : { background: "#fff8fb" }}
+                        ? { background: "linear-gradient(135deg, #ec4899, #67e8f9)" }
+                        : { background: "#fce7f3" }}
                     >
                       {cat}
                     </button>
@@ -223,8 +223,8 @@ function ShopContent({ initialProducts }) {
                         sortBy === opt.value ? "text-white font-bold" : "text-gray-600"
                       }`}
                       style={sortBy === opt.value
-                        ? { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }
-                        : { background: "#fff8fb" }}
+                        ? { background: "linear-gradient(135deg, #ec4899, #67e8f9)" }
+                        : { background: "#fce7f3" }}
                     >
                       {opt.label}
                     </button>
@@ -246,7 +246,7 @@ function ShopContent({ initialProducts }) {
             <button
               onClick={() => setActiveCategory("All")}
               className="mt-6 px-8 py-3 text-white text-sm font-bold rounded-full"
-              style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+              style={{ background: "linear-gradient(135deg, #ec4899, #67e8f9)" }}
             >
               View All Products
             </button>
@@ -267,7 +267,7 @@ export default function ShopClient({ initialProducts }) {
   return (
     <Suspense
       fallback={
-        <div style={{ background: "linear-gradient(160deg, #fff8fb 0%, #f0fbff 100%)" }} className="min-h-screen">
+        <div style={{ background: "linear-gradient(160deg, #fce7f3 0%, #ecfdf5 100%)" }} className="min-h-screen">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 mt-8">
               {[...Array(8)].map((_, i) => (

@@ -27,14 +27,14 @@ export default function AdminSidebar() {
             borderRadius: "50%",
             background: "#fff",
             padding: 2,
-            backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#C97BAA,#4ECDC4)",
+            backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#ec4899,#67e8f9)",
             backgroundOrigin: "border-box",
             backgroundClip: "padding-box, border-box",
             flexShrink: 0,
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden", background: "#fff" }}>
-            <Image src="/ms-logo.svg" alt="Marvels Logo" fill className="object-contain" sizes="44px" />
+            <Image src="/marvels-logo.svg" alt="Marvels Logo" fill className="object-contain" sizes="44px" />
           </div>
         </div>
         <Link href="/admin" className="text-left">
@@ -58,7 +58,7 @@ export default function AdminSidebar() {
                       : "text-gray-300 hover:bg-white/10 hover:text-white hover:transform hover:scale-105"
                   }`}
                   style={isActive ? { 
-                    background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                    background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                     boxShadow: "0 8px 32px rgba(255, 45, 135, 0.3)"
                   } : {}}
                 >
@@ -75,7 +75,7 @@ export default function AdminSidebar() {
       <div className="px-4 py-4 border-t border-white/10">
         <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm">
           <div className="flex items-center gap-2 mb-2">
-            <BarChart3 size={16} className="text-[#ff2d87]" />
+            <BarChart3 size={16} className="text-[#ec4899]" />
             <span className="text-xs font-bold uppercase tracking-wide text-gray-300">Quick Stats</span>
           </div>
           <div className="grid grid-cols-2 gap-2 text-xs">
@@ -95,7 +95,7 @@ export default function AdminSidebar() {
       <div className="px-4 pb-4">
         <Link
           href="/"
-          className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-[#3ab7e8] transition-all duration-300 rounded-xl hover:bg-white/5"
+          className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-[#67e8f9] transition-all duration-300 rounded-xl hover:bg-white/5"
         >
           <Store size={16} /> 
           <span>View Store</span>
@@ -105,7 +105,7 @@ export default function AdminSidebar() {
       {/* Footer */}
       <div className="border-t border-white/5 px-4 py-4 text-center">
         <p className="text-[10px] font-medium text-gray-500">
-          © {new Date().getFullYear()} MARVELS Fashion
+          © {new Date().getFullYear()} MARVELS Kids & Sports Wear
         </p>
         <p className="text-[8px] text-gray-600 mt-1">
           Admin Dashboard v2.0

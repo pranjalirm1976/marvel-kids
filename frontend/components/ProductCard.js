@@ -86,7 +86,7 @@ export default function ProductCard({ product, priority = false }) {
             {product.tags?.includes("new-arrival") && (
               <span
                 className="px-2 py-1 text-[10px] font-black uppercase tracking-wide text-white"
-                style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+                style={{ background: "linear-gradient(135deg, #ec4899, #67e8f9)" }}
               >
                 NEW
               </span>
@@ -117,7 +117,7 @@ export default function ProductCard({ product, priority = false }) {
               }`}
               style={added
                 ? { background: "#00c853" }
-                : { background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }
+                : { background: "linear-gradient(135deg, #ec4899, #67e8f9)" }
               }
             >
               {added ? <Check size={14} strokeWidth={3} /> : <ShoppingBag size={14} />}
@@ -148,7 +148,7 @@ export default function ProductCard({ product, priority = false }) {
         {/* ===== INFO ===== */}
         <div className="p-3 sm:p-4">
           {/* Brand tag */}
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#ff2d87]">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#ec4899]">
             {product.brand || "MARVELS"}
           </p>
 

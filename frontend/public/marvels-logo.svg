@@ -1,8 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <!-- White background circle -->
-  <circle cx="100" cy="100" r="100" fill="white"/>
-
-  <!-- Outer decorative circle ring — pink/teal gradient stroke -->
+  <!-- Outer decorative circle ring — pink/cyan gradient stroke -->
   <defs>
     <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%"   stop-color="#ec4899"/>
@@ -28,19 +25,20 @@
     font-family="Georgia, 'Times New Roman', serif"
     font-size="88"
     font-style="italic"
-    font-weight="400"
+    font-weight="700"
     fill="url(#mGrad)"
-    letter-spacing="-2"
+    letter-spacing="-8"
   >M</text>
 
-  <!-- S letter (teal) — overlapping, shifted right -->
+  <!-- S letter (cyan) -->
   <text
-    x="78"
-    y="128"
+    x="95"
+    y="130"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="76"
+    font-size="88"
     font-style="italic"
-    font-weight="400"
+    font-weight="700"
     fill="url(#sGrad)"
+    letter-spacing="-8"
   >S</text>
 </svg>

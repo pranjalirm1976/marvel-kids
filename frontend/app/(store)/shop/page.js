@@ -24,7 +24,7 @@ export default async function ShopPage() {
       fallback={
         <div
           className="min-h-screen"
-          style={{ background: "linear-gradient(160deg, #fff8fb 0%, #f0fbff 100%)" }}
+          style={{ background: "linear-gradient(160deg, #fce7f3 0%, #ecfdf5 100%)" }}
         />
       }
     >

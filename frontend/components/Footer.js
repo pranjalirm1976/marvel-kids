@@ -35,17 +35,17 @@ const companyLinks = [
   { label: "Refund Policy",      href: "#" },
 ];
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram", color: "#ff2d87" },
-  { icon: Twitter,   href: "#", label: "Twitter",   color: "#3ab7e8" },
-  { icon: Facebook,  href: "#", label: "Facebook",  color: "#3ab7e8" },
-  { icon: Youtube,   href: "#", label: "YouTube",   color: "#ff2d87" },
+  { icon: Instagram, href: "#", label: "Instagram", color: "#ec4899" },
+  { icon: Twitter,   href: "#", label: "Twitter",   color: "#67e8f9" },
+  { icon: Facebook,  href: "#", label: "Facebook",  color: "#67e8f9" },
+  { icon: Youtube,   href: "#", label: "YouTube",   color: "#ec4899" },
 ];
 
 function ColHead({ title, pink }) {
   return (
     <h4
       className="mb-4 text-[11px] font-extrabold uppercase tracking-widest"
-      style={{ color: pink ? "#ff2d87" : "#3ab7e8" }}
+      style={{ color: pink ? "#ec4899" : "#67e8f9" }}
     >
       {title}
     </h4>
@@ -57,7 +57,7 @@ function LinkList({ links }) {
     <ul className="space-y-2">
       {links.map((l) => (
         <li key={l.label}>
-          <Link href={l.href} className="text-[11px] text-gray-400 hover:text-[#ff2d87] transition-colors">
+          <Link href={l.href} className="text-[11px] text-gray-400 hover:text-[#ec4899] transition-colors">
             {l.label}
           </Link>
         </li>
@@ -70,20 +70,20 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "linear-gradient(180deg, #fff8fb 0%, #f0fbff 40%, #fce8f3 100%)",
-        borderTop: "1.5px solid #fce8f3",
+        background: "linear-gradient(180deg, #fce7f3 0%, #ecfdf5 40%, #fbcfe8 100%)",
+        borderTop: "1.5px solid #fbcfe8",
       }}
     >
 
       {/* ── Trust badges ── */}
-      <div style={{ borderBottom: "1px solid #fce8f3" }}>
+      <div style={{ borderBottom: "1px solid #fbcfe8" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { icon: RotateCcw,   text: "10-Day Easy Returns",       color: "#ff2d87" },
-              { icon: Shield,      text: "100% Secure Payments",       color: "#3ab7e8" },
-              { icon: Mail,        text: "marvelskidswear@gmail.com",  color: "#ff2d87" },
-              { icon: Headphones,  text: "Help & Support",             color: "#3ab7e8" },
+              { icon: RotateCcw,   text: "10-Day Easy Returns",       color: "#ec4899" },
+              { icon: Shield,      text: "100% Secure Payments",       color: "#67e8f9" },
+              { icon: Mail,        text: "marvelskidswear@gmail.com",  color: "#ec4899" },
+              { icon: Headphones,  text: "Help & Support",             color: "#67e8f9" },
             ].map(({ icon: Icon, text, color }) => (
               <div key={text} className="flex items-center gap-2.5">
                 <Icon size={15} className="flex-shrink-0" style={{ color }} />
@@ -95,7 +95,7 @@ export default function Footer() {
       </div>
 
       {/* ── Newsletter ── */}
-      <div style={{ borderBottom: "1px solid #fce8f3" }}>
+      <div style={{ borderBottom: "1px solid #fbcfe8" }}>
         <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
             <div>
@@ -103,7 +103,7 @@ export default function Footer() {
                 Join the{" "}
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                    background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -116,7 +116,7 @@ export default function Footer() {
               <p className="mt-1 text-xs text-gray-400">Get 10% off your first order + exclusive drops</p>
             </div>
             <div className="flex w-full sm:w-auto rounded-full overflow-hidden shadow-sm"
-                 style={{ border: "1.5px solid #fce8f3" }}>
+                 style={{ border: "1.5px solid #fbcfe8" }}>
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -124,7 +124,7 @@ export default function Footer() {
               />
               <button
                 className="flex items-center gap-1.5 px-5 py-3 text-[10px] font-black uppercase tracking-wider text-white transition-all hover:opacity-90"
-                style={{ background: "linear-gradient(135deg, #ff2d87, #3ab7e8)" }}
+                style={{ background: "linear-gradient(135deg, #ec4899, #67e8f9)" }}
               >
                 Subscribe <ArrowRight size={12} />
               </button>
@@ -143,7 +143,7 @@ export default function Footer() {
               <h3
                 className="text-lg font-black uppercase tracking-tight"
                 style={{
-                  background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                  background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -164,7 +164,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm border border-[#fce8f3] text-gray-400 transition-all hover:scale-110"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm border border-[#fbcfe8] text-gray-400 transition-all hover:scale-110"
                   style={{ "--hover-color": color }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = color)}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "")}
@@ -205,13 +205,13 @@ export default function Footer() {
             <LinkList links={companyLinks} />
             <div className="mt-6 space-y-2.5">
               <a href="mailto:marvelskidswear@gmail.com" className="flex items-start gap-2 group">
-                <Mail size={12} className="mt-0.5 flex-shrink-0 text-[#ff2d87]" />
-                <span className="text-[10px] text-gray-400 group-hover:text-[#ff2d87] transition-colors break-all">
+                <Mail size={12} className="mt-0.5 flex-shrink-0 text-[#ec4899]" />
+                <span className="text-[10px] text-gray-400 group-hover:text-[#ec4899] transition-colors break-all">
                   marvelskidswear@gmail.com
                 </span>
               </a>
               <div className="flex items-start gap-2">
-                <MapPin size={12} className="mt-0.5 flex-shrink-0 text-[#3ab7e8]" />
+                <MapPin size={12} className="mt-0.5 flex-shrink-0 text-[#67e8f9]" />
                 <span className="text-[10px] text-gray-400">Mumbai, Maharashtra, India</span>
               </div>
             </div>
@@ -220,21 +220,21 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div style={{ borderTop: "1px solid #fce8f3" }}>
+      <div style={{ borderTop: "1px solid #fbcfe8" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[10px] font-medium text-gray-400 flex items-center gap-1">
             © {new Date().getFullYear()} MARVELS Kids &amp; Sports Wear. Made with{" "}
-            <Heart size={10} className="text-[#ff2d87] animate-heart-beat" fill="currentColor" /> in India
+            <Heart size={10} className="text-[#ec4899] animate-heart-beat" fill="currentColor" /> in India
           </p>
           <div className="flex items-center gap-4 text-[10px] font-medium uppercase tracking-wider text-gray-400">
             <span>100% Secure Payments</span>
-            <span className="h-3 w-px bg-[#fce8f3]" />
+            <span className="h-3 w-px bg-[#fbcfe8]" />
             <span>Free Shipping ₹499+</span>
-            <span className="h-3 w-px bg-[#fce8f3]" />
+            <span className="h-3 w-px bg-[#fbcfe8]" />
             <span
               className="font-bold"
               style={{
-                background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

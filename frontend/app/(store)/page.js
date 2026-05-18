@@ -7,43 +7,43 @@ const categoryCards = [
     subtitle: "Cool styles for every adventure",
     href: "/shop?category=Boys",
     image: "/cat-boys.png",
-    accent: "#3ab7e8",
-    bg: "linear-gradient(135deg, #e3f6fd 0%, #c8edfa 100%)",
-    badge: "bg-[#3ab7e8]",
+    accent: "#67e8f9",
+    bg: "linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
+    badge: "bg-[#67e8f9]",
   },
   {
     title: "Girls",
     subtitle: "Cute & trendy outfits for every occasion",
     href: "/shop?category=Girls",
     image: "/cat-girls.png",
-    accent: "#ff2d87",
-    bg: "linear-gradient(135deg, #fce8f3 0%, #fad0e8 100%)",
-    badge: "bg-[#ff2d87]",
+    accent: "#ec4899",
+    bg: "linear-gradient(135deg, #fbcfe8 0%, #f8bbd0 100%)",
+    badge: "bg-[#ec4899]",
   },
   {
     title: "Sports Wear",
     subtitle: "Comfort & performance for every move",
     href: "/shop?category=Sports",
     image: "/cat-sports.png",
-    accent: "#3ab7e8",
-    bg: "linear-gradient(135deg, #e3f6fd 0%, #d0f0fa 100%)",
-    badge: "bg-[#3ab7e8]",
+    accent: "#67e8f9",
+    bg: "linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
+    badge: "bg-[#67e8f9]",
   },
 ];
 
 
 export default function Home() {
   return (
-    <div className="pb-10" style={{ background: "linear-gradient(160deg, #fff8fb 0%, #f0fbff 100%)" }}>
+    <div className="pb-10" style={{ background: "linear-gradient(160deg, #fce7f3 0%, #ecfdf5 100%)" }}>
 
       {/* ─── HERO ─── */}
-      <section className="overflow-hidden" style={{ background: "linear-gradient(135deg, #fff8fb 0%, #f0fbff 60%, #fff8fb 100%)" }}>
+      <section className="overflow-hidden" style={{ background: "linear-gradient(135deg, #fce7f3 0%, #ecfdf5 60%, #fce7f3 100%)" }}>
         {/* Decorative blobs */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full opacity-20"
-               style={{ background: "radial-gradient(circle, #ff2d87, transparent 70%)" }} />
+               style={{ background: "radial-gradient(circle, #ec4899, transparent 70%)" }} />
           <div className="absolute -top-16 right-0 h-80 w-80 rounded-full opacity-15"
-               style={{ background: "radial-gradient(circle, #3ab7e8, transparent 70%)" }} />
+               style={{ background: "radial-gradient(circle, #67e8f9, transparent 70%)" }} />
         </div>
 
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-[1fr_1.6fr] min-h-[520px]">
@@ -53,8 +53,8 @@ export default function Home() {
 
             {/* Badge */}
             <div className="flex items-center gap-2 mb-5 animate-fade-in-up">
-              <span className="text-[#ff2d87] text-base">✿</span>
-              <span className="text-[11px] font-black uppercase tracking-[0.28em] text-[#ff2d87]">
+              <span className="text-[#ec4899] text-base">✿</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.28em] text-[#ec4899]">
                 New Season 2026
               </span>
             </div>
@@ -65,7 +65,7 @@ export default function Home() {
               <span
                 className="block text-[52px] sm:text-[68px] lg:text-[80px]"
                 style={{
-                  background: "linear-gradient(135deg, #ff2d87, #3ab7e8)",
+                  background: "linear-gradient(135deg, #ec4899, #67e8f9)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -87,15 +87,15 @@ export default function Home() {
                 href="/shop"
                 className="inline-flex items-center gap-2 px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-widest text-white rounded-full transition-all hover:scale-105 active:scale-100"
                 style={{
-                  background: "linear-gradient(135deg, #ff2d87, #ff6aab)",
-                  boxShadow: "0 8px 28px rgba(255,45,135,0.35)",
+                  background: "linear-gradient(135deg, #ec4899, #f472b6)",
+                  boxShadow: "0 8px 28px rgba(236,72,153,0.35)",
                 }}
               >
                 Shop Now →
               </Link>
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-2 border-2 border-[#fce8f3] bg-white px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-widest text-[#2d2d3a] hover:border-[#ff2d87] hover:text-[#ff2d87] transition-all rounded-full"
+                className="inline-flex items-center gap-2 border-2 border-[#fbcfe8] bg-white px-7 py-3.5 text-[11px] font-extrabold uppercase tracking-widest text-[#2d2d3a] hover:border-[#ec4899] hover:text-[#ec4899] transition-all rounded-full"
               >
                 Explore Collections
               </Link>
@@ -105,7 +105,7 @@ export default function Home() {
           {/* ── RIGHT: images grid ── */}
           <div className="grid grid-cols-[1.4fr_1fr] gap-2 p-2 min-h-[420px] lg:min-h-0">
             {/* Center tall image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-pink-100">
+            <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-pink-200">
               <Image
                 src="/hero-girls.png"
                 alt="Girls premium wear"
@@ -116,11 +116,11 @@ export default function Home() {
               />
               {/* Gradient overlay at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-24"
-                   style={{ background: "linear-gradient(to top, rgba(252,232,243,0.6), transparent)" }} />
+                   style={{ background: "linear-gradient(to top, rgba(251,207,232,0.6), transparent)" }} />
             </div>
             {/* Right — two stacked images */}
             <div className="grid grid-rows-2 gap-2">
-              <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-blue-100">
+              <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-cyan-200">
                 <Image
                   src="/hero-teal.png"
                   alt="Teal dress"
@@ -129,7 +129,7 @@ export default function Home() {
                   className="object-cover object-top"
                 />
               </div>
-              <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-pink-100">
+              <div className="relative rounded-3xl overflow-hidden shadow-lg shadow-pink-200">
                 <Image
                   src="/hero-yellow.png"
                   alt="Yellow dress"
