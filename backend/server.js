@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
@@ -25,7 +26,14 @@ app.use(express.json());
 
 // --------------- Routes ---------------
 
-app.get('/api/health', (req, res) => res.status(200).json({ status: 'success', message: 'Server is live' }));
+app.get('/api/health', (_req, res) => {
+  const databaseConnected = mongoose.connection.readyState === 1;
+  res.status(databaseConnected ? 200 : 503).json({
+    status: databaseConnected ? "success" : "unavailable",
+    database: databaseConnected ? "connected" : "disconnected",
+    message: databaseConnected ? "Server and database are ready" : "Server is live but database is unavailable",
+  });
+});
 
 app.get('/', (req, res) => res.status(200).send('Marvel Kids API is running.'));
 
