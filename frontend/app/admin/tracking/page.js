@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Truck, Package, MapPin, Clock, CheckCircle, AlertCircle, Search } from "lucide-react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
+
 export default function TrackingAdmin() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ export default function TrackingAdmin() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/orders?limit=100`);
+      const response = await fetch(`${API_BASE}/api/admin/orders?limit=100`);
       const data = await response.json();
       if (data.success) {
         // Filter orders that have tracking information
@@ -36,7 +38,7 @@ export default function TrackingAdmin() {
   const fetchTrackingData = async (orderId) => {
     setTrackingLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/orders/${orderId}/tracking`);
+      const response = await fetch(`${API_BASE}/api/admin/orders/${orderId}/tracking`);
       const data = await response.json();
       if (data.success) {
         setTrackingData(data.trackingData);

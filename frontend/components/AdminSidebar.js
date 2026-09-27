@@ -27,7 +27,7 @@ export default function AdminSidebar() {
             borderRadius: "50%",
             background: "#fff",
             padding: 2,
-            backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#ec4899,#67e8f9)",
+            backgroundImage: "linear-gradient(#fff,#fff), linear-gradient(135deg,#facc15,#111111)",
             backgroundOrigin: "border-box",
             backgroundClip: "padding-box, border-box",
             flexShrink: 0,
@@ -54,12 +54,12 @@ export default function AdminSidebar() {
                   href={href}
                   className={`flex items-center gap-4 px-4 py-4 text-sm font-bold transition-all duration-300 rounded-xl group ${
                     isActive
-                      ? "text-white shadow-lg transform scale-105"
+                      ? "text-black shadow-lg transform scale-105"
                       : "text-gray-300 hover:bg-white/10 hover:text-white hover:transform hover:scale-105"
                   }`}
                   style={isActive ? { 
-                    background: "linear-gradient(135deg, #ec4899, #67e8f9)",
-                    boxShadow: "0 8px 32px rgba(255, 45, 135, 0.3)"
+                    background: "linear-gradient(135deg, #facc15, #eab308)",
+                    boxShadow: "0 8px 24px rgba(250, 204, 21, 0.22)"
                   } : {}}
                 >
                   <Icon size={20} className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
@@ -75,7 +75,7 @@ export default function AdminSidebar() {
       <div className="px-4 py-4 border-t border-white/10">
         <div className="bg-white/5 rounded-xl p-4 backdrop-blur-sm">
           <div className="flex items-center gap-2 mb-2">
-            <BarChart3 size={16} className="text-[#ec4899]" />
+            <BarChart3 size={16} className="text-[#facc15]" />
             <span className="text-xs font-bold uppercase tracking-wide text-gray-300">Quick Stats</span>
           </div>
           <div className="grid grid-cols-2 gap-2 text-xs">
@@ -95,7 +95,7 @@ export default function AdminSidebar() {
       <div className="px-4 pb-4">
         <Link
           href="/"
-          className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-[#67e8f9] transition-all duration-300 rounded-xl hover:bg-white/5"
+          className="flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-[#facc15] transition-all duration-300 rounded-xl hover:bg-white/5"
         >
           <Store size={16} /> 
           <span>View Store</span>

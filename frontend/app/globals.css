@@ -355,6 +355,82 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gradient-accent);
 }
+
+/* Admin-only palette overrides; storefront pages retain the MARVELS brand colors. */
+.admin-theme {
+  --admin-yellow: #facc15;
+  --admin-yellow-dark: #eab308;
+  --admin-black: #111111;
+  --admin-surface: #f4f4f1;
+}
+
+.admin-theme main {
+  background-color: var(--admin-surface) !important;
+}
+
+.admin-theme aside {
+  background-color: var(--admin-black) !important;
+  background-image: none !important;
+}
+
+.admin-theme [class*="bg-gradient-to-r"] {
+  background-image: linear-gradient(135deg, var(--admin-yellow), var(--admin-yellow-dark)) !important;
+}
+
+.admin-theme [class*="bg-gradient-to-r"][class*="p-8"] {
+  background-image: linear-gradient(110deg, #111111, #262626) !important;
+  border-left: 4px solid var(--admin-yellow);
+}
+
+.admin-theme [class*="bg-[#ec4899]"],
+.admin-theme [class*="bg-[#f472b6]"],
+.admin-theme [class*="bg-[#67e8f9]"],
+.admin-theme [class*="bg-[#a5f3fc]"],
+.admin-theme [class*="bg-[#25d366]"],
+.admin-theme [class*="bg-[#128c7e]"],
+.admin-theme [class*="bg-[#ff9800]"],
+.admin-theme [class*="bg-[#f57c00]"],
+.admin-theme [class*="bg-[#9c27b0]"] {
+  background-color: var(--admin-yellow) !important;
+  color: var(--admin-black) !important;
+}
+
+.admin-theme [class*="bg-gradient-to-r"]:not([class*="p-8"]) svg,
+.admin-theme [class*="bg-[#ec4899]"] svg,
+.admin-theme [class*="bg-[#f472b6]"] svg,
+.admin-theme [class*="bg-[#67e8f9]"] svg,
+.admin-theme [class*="bg-[#a5f3fc]"] svg,
+.admin-theme [class*="bg-[#25d366]"] svg,
+.admin-theme [class*="bg-[#128c7e]"] svg,
+.admin-theme [class*="bg-[#ff9800]"] svg,
+.admin-theme [class*="bg-[#f57c00]"] svg,
+.admin-theme [class*="bg-[#9c27b0]"] svg {
+  color: var(--admin-black) !important;
+}
+
+.admin-theme [class*="text-[#ec4899]"],
+.admin-theme [class*="text-[#f472b6]"],
+.admin-theme [class*="text-[#67e8f9]"],
+.admin-theme [class*="text-[#a5f3fc]"],
+.admin-theme [class*="text-[#25d366]"],
+.admin-theme [class*="text-[#128c7e]"],
+.admin-theme [class*="text-[#ff9800]"],
+.admin-theme [class*="text-[#f57c00]"] {
+  color: var(--admin-black) !important;
+}
+
+.admin-theme *:focus-visible {
+  outline-color: var(--admin-yellow-dark);
+}
+
+.admin-theme main::-webkit-scrollbar-track {
+  background: var(--admin-surface);
+}
+
+.admin-theme main::-webkit-scrollbar-thumb {
+  background: var(--admin-yellow-dark);
+}
+
 @keyframes slide-in-right {
   from { opacity: 0; transform: translateX(30px); }
   to   { opacity: 1; transform: translateX(0);    }

@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, Send, Users, CheckCircle, XCircle, Clock } from "lucide-react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
+
 export default function WhatsAppAdmin() {
   const [activeTab, setActiveTab] = useState("send");
   const [offerDetails, setOfferDetails] = useState("");
@@ -19,7 +21,7 @@ export default function WhatsAppAdmin() {
 
   const fetchRecentOrders = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/orders?limit=50`);
+      const response = await fetch(`${API_BASE}/api/admin/orders?limit=50`);
       const data = await response.json();
       if (data.success) {
         setOrders(data.orders);
@@ -48,7 +50,7 @@ export default function WhatsAppAdmin() {
 
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/whatsapp/promotional`, {
+      const response = await fetch(`${API_BASE}/api/admin/whatsapp/promotional`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

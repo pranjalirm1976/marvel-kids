@@ -4,6 +4,8 @@ import { Package, ShoppingCart, IndianRupee, TrendingUp, Users, Eye, MessageCirc
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://marvel-kids-api.onrender.com";
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
     total: { totalRevenue: 0, totalOrders: 0, avgOrderValue: 0 },
@@ -21,7 +23,7 @@ export default function AdminDashboard() {
 
   const fetchDashboardStats = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/dashboard`);
+      const response = await fetch(`${API_BASE}/api/admin/dashboard`);
       const data = await response.json();
       
       if (data.success) {
@@ -41,7 +43,7 @@ export default function AdminDashboard() {
       change: `${stats.today.todayRevenue > 0 ? `+₹${(stats.today.todayRevenue / 100).toFixed(0)} today` : 'No sales today'}`,
       icon: IndianRupee,
       color: "bg-gradient-to-r from-[#ec4899] to-[#f472b6]",
-      textColor: "text-white",
+      textColor: "text-black",
     },
     {
       title: "Total Orders",
@@ -49,7 +51,7 @@ export default function AdminDashboard() {
       change: `${stats.today.todayOrders > 0 ? `+${stats.today.todayOrders} today` : 'No orders today'}`,
       icon: ShoppingCart,
       color: "bg-gradient-to-r from-[#67e8f9] to-[#a5f3fc]",
-      textColor: "text-white",
+      textColor: "text-black",
     },
     {
       title: "Avg Order Value",
@@ -57,7 +59,7 @@ export default function AdminDashboard() {
       change: `${stats.total.totalOrders > 0 ? 'Per order' : 'No data'}`,
       icon: TrendingUp,
       color: "bg-gradient-to-r from-[#00c853] to-[#4caf50]",
-      textColor: "text-white",
+      textColor: "text-black",
     },
     {
       title: "Pending Orders",
@@ -65,7 +67,7 @@ export default function AdminDashboard() {
       change: "Need attention",
       icon: AlertCircle,
       color: "bg-gradient-to-r from-[#ff9800] to-[#ffb74d]",
-      textColor: "text-white",
+      textColor: "text-black",
     },
   ];
 
@@ -117,7 +119,7 @@ export default function AdminDashboard() {
               className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               <div className={`${color} p-3 rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <Icon size={24} className="text-white" />
+                <Icon size={24} className="text-black" />
               </div>
               <span className="text-sm font-bold text-gray-900 group-hover:text-gray-700">{label}</span>
             </Link>
